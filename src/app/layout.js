@@ -1,4 +1,13 @@
+import Footer from '@/components/footer';
+import Header from '@/components/header';
 import '@sass/main.scss';
+
+import { Montserrat } from 'next/font/google';
+
+const montserrat = Montserrat({
+  subsets: ['cyrillic'],
+  weight: ['400', '500', '600', '700'],
+});
 
 export const metadata = {
   title: 'Пізнайки',
@@ -11,8 +20,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang='ua'>
-      <body>{children}</body>
+    <html lang='uk'>
+      <body className={montserrat.className}>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
