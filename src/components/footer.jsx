@@ -15,12 +15,13 @@ export default function Footer() {
           <Link href='/'>
             <Image src={logo} alt='Пізнайки' width={367} />
           </Link>
-          <h2 className='font-normal text-white opacity-50 max-w-50 mt-16'>
-            Мережа закладів освіти у місті Вишгород.
+          <h2 className='font-normal text-white text-center opacity-50 max-w-[400px] mt-16 lg:text-left '>
+            Приватний заклад дошкільної освіти «Центр розвитку дитини «Пізнайки-Розвивайки» <br />
+            м. Вишгород
           </h2>
         </div>
-        <div className='flex flex-col  justify-between'>
-          <div className='flex items-center gap-4'>
+        <div className='flex flex-col justify-between gap-4'>
+          <div className='flex flex-col items-center gap-4 order-2 lg:order-0 lg:flex-row'>
             <div className='footer-socials'>
               <Link href='https://www.facebook.com/?locale=uk_UA' target='_blank'>
                 <Image src={facebook} alt='Фейсбук школи' />
