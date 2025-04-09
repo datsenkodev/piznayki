@@ -53,7 +53,7 @@ export default function Header() {
                 </div>
               </li>
               <li>
-                <Link href='/about'>Про нас</Link>
+                <Link href='/about-us'>Про нас</Link>
               </li>
               <li>
                 <Link href='/vacancy'>Вакансії</Link>

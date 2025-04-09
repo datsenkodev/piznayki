@@ -44,7 +44,7 @@ export default function Hero() {
               <Image src={hero1} alt='Дитячий садок' />
             </div>
 
-            <h2 className='font-bold text-xl text-white'>
+            <h2 className='hero-button'>
               Дитячий <br />
               садок
             </h2>
@@ -60,7 +60,7 @@ export default function Hero() {
               <Image src={hero2} alt='Середня школа' />
             </div>
 
-            <h2 className='font-bold text-xl text-white'>
+            <h2 className='hero-button'>
               Середня <br /> школа
             </h2>
 
@@ -75,7 +75,7 @@ export default function Hero() {
               <Image src={hero3} alt='Початкова школа' />
             </div>
 
-            <h2 className='font-bold text-xl text-white'>
+            <h2 className='hero-button'>
               Початкова <br />
               школа
             </h2>
@@ -91,7 +91,7 @@ export default function Hero() {
               <Image src={hero4} alt='Репетиторський центр' />
             </div>
 
-            <h2 className='font-bold text-xl text-white break-all'>
+            <h2 className='hero-button break-all'>
               Репетиторський <br />
               центр
             </h2>

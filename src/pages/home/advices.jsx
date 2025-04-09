@@ -214,7 +214,7 @@ export default function Advices() {
           Більше корисної інформації ви можете знайти на нашій сторінці Instagram та Facebook
         </p>
         <div className='social-buttons my-[1.25rem_5rem] md:my-[3.5rem_10rem]'>
-          <a href='https://www.facebook.com/' className='fb'>
+          <Link href='https://www.facebook.com/Piznayki/' className='fb' target='_blank'>
             <svg
               width='34'
               height='34'
@@ -227,8 +227,8 @@ export default function Advices() {
               />
             </svg>
             Facebook
-          </a>
-          <a href='https://www.instagram.com/' className='inst'>
+          </Link>
+          <Link href='https://www.instagram.com/' className='inst' target='_blank'>
             <svg
               width='34'
               height='34'
@@ -241,7 +241,7 @@ export default function Advices() {
               />
             </svg>
             Instagram
-          </a>
+          </Link>
         </div>
       </div>
     </section>
