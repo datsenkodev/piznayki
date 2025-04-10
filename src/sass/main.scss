@@ -564,11 +564,11 @@ footer {
 
 .btn-outlined {
   padding: 0.5rem 2rem;
-  border: 1px solid #727efc;
+  border: 1px solid $accentColor;
   border-radius: 3.125rem;
   font-size: clamp(1.75rem, 1.6361rem + 0.5063vw, 2rem);
   font-weight: bold;
-  color: var(--accentColor);
+  color: $accentColor;
   line-height: 100%;
   &:hover .underline-effect::after {
     max-width: 100%;
@@ -580,7 +580,7 @@ footer {
   display: block;
   max-width: 0;
   height: 2px;
-  background: $accentColor;
+  background: currentColor;
   transition: max-width 0.3s ease;
 }
 
@@ -1298,6 +1298,176 @@ footer {
   }
 }
 
+//? Contacts Page
+.contacts-page {
+  position: relative;
+}
+
+#map {
+  max-height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 110svh;
+}
+
+.contacts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.55rem;
+  background-color: $whiteColor;
+  border-radius: 1.25rem;
+  width: 32rem;
+  max-width: 90%;
+  max-height: 90svh;
+  overflow: auto;
+
+  pointer-events: all;
+
+  margin: 3rem 0;
+  padding: 2.75rem 2.5rem;
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    border-radius: 1rem;
+    width: 0.5rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #5b64c5;
+    border-radius: 1rem;
+  }
+  & li:not(:last-child) {
+    border-bottom: 1px solid #dddddd;
+    padding: 0 0 1.25rem 0;
+  }
+}
+
+.custom-radio {
+  position: relative;
+  margin: 0 0 0 2rem;
+  display: block;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #dddddd;
+    padding: 0 0 1.25rem 0;
+    margin: 0 0 1.25rem 0;
+  }
+
+  & .radio {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(calc(-100% - 1.25rem), -50%);
+
+    width: 1.5rem;
+    height: 1.5rem;
+    background: transparent;
+    border: 2px solid #a5a5a5;
+    border-radius: 50%;
+
+    transition: border 250ms cubic-bezier(0.4, 0, 0.23, 1),
+      scale 250ms cubic-bezier(0.4, 0, 0.23, 1);
+    &:hover,
+    &:focus {
+      border-color: $accentColor;
+    }
+  }
+  & input {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    opacity: 0;
+
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(calc(-100% - 1.25rem), -50%);
+
+    &:focus + .radio,
+    &:hover + .radio {
+      border-color: $accentColor;
+    }
+    &:checked + .radio {
+      border: 0.8em solid $accentColor;
+      animation: shrink-bounce 200ms cubic-bezier(0.4, 0, 0.23, 1);
+    }
+  }
+}
+
+.contacts-panel {
+  position: relative;
+  z-index: 1;
+  background: $accentColor;
+  padding: 4rem 0;
+  & .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.25rem 6rem;
+  }
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex: 1 1 auto;
+    &:hover img,
+    &:focus img {
+      animation: shake 1s linear alternate;
+    }
+    & img {
+      border-radius: 100%;
+      background: linear-gradient(135deg, #737cdd 0%, #5760c1 100%);
+      padding: 1.3rem;
+      flex: 0 0 4.5rem;
+    }
+    & span {
+      font-weight: 400;
+      font-size: 1rem;
+      color: $whiteColor;
+      opacity: 0.8;
+    }
+    & h3 {
+      font-size: clamp(1.25rem, 1rem + 1.1111vw, 2rem);
+      color: $whiteColor;
+      font-weight: 700;
+      line-height: 100%;
+    }
+  }
+}
+@media (max-width: 1200px) {
+  .contacts-list {
+    width: 25rem;
+  }
+}
+
+@media (max-width: 880px) {
+  .contacts-list {
+    width: 22rem;
+  }
+  .contacts-panel {
+    padding: 2rem 0;
+  }
+  .contacts-panel__link img {
+    padding: 0.875rem;
+    flex: 0 0 3.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .contacts-page .container {
+    display: flex;
+    justify-content: center;
+  }
+  .contacts-list {
+    margin-bottom: 1.25rem;
+    margin-top: 28rem;
+    padding: 1.75rem;
+  }
+}
+
 //? Animations
 
 @keyframes float {
@@ -1361,5 +1531,17 @@ footer {
     -webkit-transform: rotate(-5deg);
     -moz-transform: rotate(-5deg);
     -o-transform: rotate(-5deg);
+  }
+}
+
+@keyframes shrink-bounce {
+  0% {
+    transform: translate(calc(-100% - 1.25rem), -50%) scale(1);
+  }
+  33% {
+    transform: translate(calc(-100% - 1.25rem), -50%) scale(0.85);
+  }
+  100% {
+    transform: translate(calc(-100% - 1.25rem), -50%) scale(1);
   }
 }
