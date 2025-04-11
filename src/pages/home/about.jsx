@@ -42,8 +42,8 @@ export default function About() {
   const scrollbarRef = useRef(null);
   const thumbRef = useRef(null);
 
-  let isDraggingSlider = false; // Separate flag for slider dragging
-  let isDraggingThumb = false; // Separate flag for thumb dragging
+  let isDraggingSlider = false;
+  let isDraggingThumb = false;
   let startX = 0;
   let scrollLeft = 0;
 
@@ -166,34 +166,34 @@ export default function About() {
         <div className='slider' ref={sliderRef}>
           <div className='slider__container'>
             <div className='slider__item'>
-              <Image src={slider1} alt='Щасливі діти' className='' />
+              <Image src={slider1} alt='Щасливі діти' />
             </div>
             <div className='slider__item'>
-              <Image src={slider2} alt='Щасливі діти' className='' />
+              <Image src={slider2} alt='Щасливі діти' />
             </div>
             <div className='slider__item'>
-              <Image src={slider3} alt='Щасливі діти' className='' />
+              <Image src={slider3} alt='Щасливі діти' />
             </div>
             <div className='slider__item'>
-              <Image src={slider4} alt='Щасливі діти' className='' />
+              <Image src={slider4} alt='Щасливі діти' />
             </div>
             <div className='slider__item'>
-              <Image src={slider5} alt='Щасливі діти' className='' />
+              <Image src={slider5} alt='Щасливі діти' />
             </div>
             <div className='slider__item'>
-              <Image src={slider6} alt='Щасливі діти' className='' />
+              <Image src={slider6} alt='Щасливі діти' />
             </div>
             <div className='slider__item'>
-              <Image src={slider7} alt='Щасливі діти' className='' />
+              <Image src={slider7} alt='Щасливі діти' />
             </div>
             <div className='slider__item'>
-              <Image src={slider8} alt='Щасливі діти' className='' />
+              <Image src={slider8} alt='Щасливі діти' />
             </div>
           </div>
         </div>
       </div>
       <div className='container relative'>
-        <div className='custom-scrollbar' ref={scrollbarRef}>
+        <div className='custom-scrollbar darker-scrollbar' ref={scrollbarRef}>
           <div className='custom-thumb' ref={thumbRef}></div>
         </div>
       </div>

@@ -106,9 +106,9 @@ export default function Advices() {
   return (
     <section className='advices'>
       <div className='container'>
-        <h1 className='max-w-[490px] lowercase leading-[120%] text-center md:text-left'>
+        <h2 className='max-w-[490px] lowercase leading-[120%] text-center md:text-left'>
           <span className='block uppercase'>Поради</span>для батькiв
-        </h1>
+        </h2>
       </div>
       <div className='container__right-sided'>
         <div className='slider slider-light' ref={sliderRef}>

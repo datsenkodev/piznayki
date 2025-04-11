@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -10,6 +11,8 @@ import logo from 'public/images/logo.png';
 export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isHeaderOpen, setIsHeaderOpen] = useState(false);
+
+  const pathname = usePathname();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -30,14 +33,24 @@ export default function Header() {
           <nav className='nav'>
             <ul className='nav-list'>
               <li>
-                <Link href='/'>Головна</Link>
+                <Link href='/' className={`header-link ${pathname == '/' ? 'active' : ''}`}>
+                  <span>Головна</span>
+                </Link>
               </li>
               <li>
-                <Link href='/kindergarten'>Дитячий садок</Link>
+                <Link
+                  href='/kindergarten'
+                  className={`header-link ${pathname == '/kindergarten' ? 'active' : ''}`}>
+                  <span>Дитячий садок</span>
+                </Link>
               </li>
               <li className='relative'>
                 <p
-                  className={`header-dropdown ${isDropdownOpen ? 'active' : ''}`}
+                  className={`header-dropdown ${
+                    isDropdownOpen ? 'dropdown-active' : ''
+                  } header-link ${
+                    pathname == '/middle-school' || pathname == '/primary-school' ? 'active' : ''
+                  }`}
                   onClick={toggleDropdown}
                   tabIndex={0}
                   onKeyDown={(e) => {
@@ -45,21 +58,39 @@ export default function Header() {
                       toggleDropdown();
                     }
                   }}>
-                  Школи
+                  <span>Школи</span>
                 </p>
                 <div className='dropdown-list'>
-                  <Link href='/middle-school'>Середня школа</Link>
-                  <Link href='/primary-school'>Початкова школа</Link>
+                  <Link
+                    href='/middle-school'
+                    className={`header-link ${pathname == '/middle-school' ? 'active' : ''}`}>
+                    <span>Середня школа</span>
+                  </Link>
+                  <Link
+                    href='/primary-school'
+                    className={`header-link ${pathname == '/primary-school' ? 'active' : ''}`}>
+                    <span>Початкова школа</span>
+                  </Link>
                 </div>
               </li>
               <li>
-                <Link href='/about-us'>Про нас</Link>
+                <Link
+                  href='/about-us'
+                  className={`header-link ${pathname == '/about-us' ? 'active' : ''}`}>
+                  <span>Про нас</span>
+                </Link>
               </li>
               <li>
-                <Link href='/vacancy'>Вакансії</Link>
+                <Link href='/' className='header-link'>
+                  Вакансії
+                </Link>
               </li>
               <li>
-                <Link href='/contacts'>Контакти</Link>
+                <Link
+                  href='/contacts'
+                  className={`header-link ${pathname == '/contacts' ? 'active' : ''}`}>
+                  <span>Контакти</span>
+                </Link>
               </li>
             </ul>
           </nav>

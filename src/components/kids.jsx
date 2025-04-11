@@ -17,6 +17,7 @@ export default function Kids() {
           src={kidsFullScreen}
           alt='Щасливі діти в школі'
           aria-hidden
+          quality={100}
           fill
           style={{ objectPosition: '0 40%', objectFit: 'cover' }}
         />

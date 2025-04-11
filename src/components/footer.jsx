@@ -56,7 +56,7 @@ export default function Footer() {
                 <Link href={'/about'}>Про нас</Link>
               </li>
               <li>
-                <Link href={'/vacancy'}>Вакансії</Link>
+                <Link href={'/'}>Вакансії</Link>
               </li>
               <li>
                 <Link href={'/contacts'}>Контакти</Link>

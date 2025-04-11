@@ -38,7 +38,7 @@ export default function Hero() {
 
         <div className='max-w-[60rem] self-stretch grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 z-1 relative'>
           <Link
-            href={'/'}
+            href={'/kindergarten'}
             className='flex items-center gap-4 py-6 px-5 bg-[var(--accentOrangeColor)] rounded-3xl duration-300 hover:shadow-[1px_1px_10px_var(--accentOrangeColor)] '>
             <div className='hero-icon'>
               <Image src={hero1} alt='Дитячий садок' />
@@ -54,7 +54,7 @@ export default function Hero() {
             </div>
           </Link>
           <Link
-            href={'/'}
+            href={'/middle-school'}
             className='flex items-center gap-4 py-6 px-5 bg-[var(--accentTurquoiseColor)] rounded-3xl duration-300 hover:shadow-[1px_1px_10px_var(--accentTurquoiseColor)] '>
             <div className='hero-icon'>
               <Image src={hero2} alt='Середня школа' />
@@ -69,7 +69,7 @@ export default function Hero() {
             </div>
           </Link>
           <Link
-            href={'/'}
+            href={'/primary-school'}
             className='flex items-center gap-4 py-6 px-5 bg-[var(--accentYellowColor)] rounded-3xl duration-300 hover:shadow-[1px_1px_10px_var(--accentYellowColor)] '>
             <div className='hero-icon'>
               <Image src={hero3} alt='Початкова школа' />
@@ -85,7 +85,7 @@ export default function Hero() {
             </div>
           </Link>
           <Link
-            href={'/'}
+            href={'/tutor-center'}
             className='flex items-center gap-4 py-6 px-5 bg-[var(--accentPurpleColor)] rounded-3xl  duration-300  hover:shadow-[1px_1px_10px_var(--accentPurpleColor)] '>
             <div className='hero-icon'>
               <Image src={hero4} alt='Репетиторський центр' />
