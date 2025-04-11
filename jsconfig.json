@@ -4,7 +4,9 @@
     "paths": {
       "@/*": ["src/*"],
       "@sass/*": ["src/sass/*"],
-      "@components/*": ["./src/components/*"]
+      "@components/*": ["./src/components/*"],
+      "@home/*": ["./src/pages/home/*"],
+      "@contacts/*": ["./src/pages/contacts/*"]
     },
     "target": "ES6",
     "module": "commonjs",
