@@ -8,6 +8,9 @@ import Link from 'next/link';
 
 import logo from 'public/images/logo.png';
 
+import Modal from './modal';
+import Application from './applicationModal';
+
 export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isHeaderOpen, setIsHeaderOpen] = useState(false);
@@ -94,7 +97,11 @@ export default function Header() {
               </li>
             </ul>
           </nav>
-          <button className='accent-button'>Анкета для вступу</button>
+          <Modal
+            // dataClass='big-modal'
+            trigger={<button className='accent-button'>Анкета для вступу</button>}>
+            <Application />
+          </Modal>
         </div>
         <div className={`nav-btn ${isHeaderOpen ? 'active' : ''}`} onClick={toggleHeader}>
           <span></span>

@@ -144,6 +144,34 @@ header .accent-button {
   height: 2.125rem;
   font-size: 2.125rem;
 }
+
+.form-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #eee;
+  border-radius: 0.325rem;
+  outline: none;
+  padding: 1rem 1.25rem;
+  &:focus ~ .form-label,
+  &:not(:placeholder-shown).form-input:not(:focus) ~ .form-label {
+    top: 0.375rem;
+    font-size: 0.75rem;
+  }
+}
+.form-label {
+  font-size: 1rem;
+  position: absolute;
+  left: 1.25rem;
+  top: 1rem;
+  color: #7f7f90;
+  cursor: text;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
 //* Header style
 
 .header {
@@ -527,9 +555,6 @@ header .accent-button {
   padding: 0.5rem;
   cursor: pointer;
 
-  &:hover span {
-    background-color: $accentPurpleColor;
-  }
   & span {
     position: absolute;
     top: 50%;
@@ -538,8 +563,7 @@ header .accent-button {
     width: 1.5rem;
     height: 4px;
     transform: rotate(0deg);
-    transition: all 0.3s ease-in-out;
-    background: #be94d6;
+    background: $mainColor;
     overflow: hidden;
     &:first-child {
       transform: rotate(45deg);
@@ -549,7 +573,24 @@ header .accent-button {
     }
   }
 }
-
+.application-select {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 100%;
+  color: #7f7f90;
+  padding: 0.375rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &.selected {
+    cursor: default;
+    color: $whiteColor;
+    background: #727efc;
+    border-radius: 0.2rem;
+  }
+  &:not(.selected):hover {
+    background: #e5e5e5;
+  }
+}
 //* Kids section
 
 .full-image {
