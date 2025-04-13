@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -16,25 +16,38 @@ export default function TutorCenter() {
   const scrollbarRef = useRef(null);
   const thumbRef = useRef(null);
 
-  let isDraggingSlider = false;
   let isDraggingThumb = false;
+  let isDraggingSlider = false;
   let startX = 0;
   let scrollLeft = 0;
 
-  // Thumb dragging logic
   const handleMouseDownThumb = (e) => {
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+
     isDraggingThumb = true;
-    startX = e.clientX || e.touches[0].clientX;
+    startX = clientX;
     scrollLeft = parseInt(thumbRef.current.style.left, 10) || 0;
+
     document.body.style.userSelect = 'none';
     thumbRef.current.style.cursor = 'grabbing';
+    e.preventDefault();
+  };
+
+  const handleMouseDownSlider = (e) => {
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+
+    isDraggingSlider = true;
+    startX = clientX;
+    scrollLeft = sliderRef.current.scrollLeft;
+
+    document.body.style.userSelect = 'none';
     e.preventDefault();
   };
 
   const handleMouseMoveThumb = (e) => {
     if (!isDraggingThumb) return;
 
-    const clientX = e.clientX || e.touches[0].clientX;
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
     const deltaX = clientX - startX;
     const scrollbar = scrollbarRef.current;
     const thumb = thumbRef.current;
@@ -49,57 +62,97 @@ export default function TutorCenter() {
     const slider = sliderRef.current;
     const scrollWidth = slider.scrollWidth - slider.clientWidth;
     slider.scrollLeft = (newLeft / (scrollbar.clientWidth - thumb.offsetWidth)) * scrollWidth;
+
+    e.preventDefault();
   };
 
-  const handleMouseUpThumb = () => {
+  const handleMouseMoveSlider = (e) => {
+    if (!isDraggingSlider) return;
+
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+    const deltaX = clientX - startX;
+
+    sliderRef.current.scrollLeft = scrollLeft - deltaX;
+
+    e.preventDefault();
+  };
+
+  const handleMouseUp = () => {
     isDraggingThumb = false;
+    isDraggingSlider = false;
     document.body.style.userSelect = '';
-    thumbRef.current.style.cursor = 'grab';
+    if (thumbRef.current) {
+      thumbRef.current.style.cursor = 'grab';
+    }
   };
 
-  // Update thumb position based on slider scroll
   const updateThumbPosition = () => {
     const slider = sliderRef.current;
     const scrollbar = scrollbarRef.current;
     const thumb = thumbRef.current;
 
-    const scrollLeft = slider.scrollLeft;
+    if (!slider || !scrollbar || !thumb) return;
+
     const scrollWidth = slider.scrollWidth - slider.clientWidth;
+    const scrollbarWidth = scrollbar.clientWidth - thumb.offsetWidth;
+
     const thumbWidth = (slider.clientWidth / slider.scrollWidth) * scrollbar.clientWidth;
 
     thumb.style.width = `${thumbWidth}px`;
-    thumb.style.left = `${(scrollLeft / scrollWidth) * (scrollbar.clientWidth - thumbWidth)}px`;
+
+    const thumbLeft = (slider.scrollLeft / scrollWidth) * scrollbarWidth;
+    thumb.style.left = `${thumbLeft}px`;
   };
 
   useEffect(() => {
     const slider = sliderRef.current;
     const thumb = thumbRef.current;
 
-    // Initialize thumb position
     updateThumbPosition();
 
-    // Add event listeners for thumb dragging (mouse)
+    // Add event listeners for thumb dragging
     thumb.addEventListener('mousedown', handleMouseDownThumb);
-    document.addEventListener('mousemove', handleMouseMoveThumb);
-    document.addEventListener('mouseup', handleMouseUpThumb);
+    document.addEventListener('mousemove', handleMouseMoveThumb, { passive: false });
+    document.addEventListener('mouseup', handleMouseUp);
 
-    // Add event listeners for thumb dragging (touch)
+    // Add event listeners for slider dragging
+    slider.addEventListener('mousedown', handleMouseDownSlider);
+    document.addEventListener('mousemove', handleMouseMoveSlider, { passive: false });
+    document.addEventListener('mouseup', handleMouseUp);
+
+    // Add touch events for both thumb and slider
     thumb.addEventListener('touchstart', handleMouseDownThumb);
-    document.addEventListener('touchmove', handleMouseMoveThumb);
-    document.addEventListener('touchend', handleMouseUpThumb);
+    document.addEventListener('touchmove', handleMouseMoveThumb, { passive: false });
+    document.addEventListener('touchend', handleMouseUp);
 
-    // Add event listeners for slider scroll
+    slider.addEventListener('touchstart', handleMouseDownSlider);
+    document.addEventListener('touchmove', handleMouseMoveSlider, { passive: false });
+    document.addEventListener('touchend', handleMouseUp);
+
+    // Sync thumb position with slider scroll
     slider.addEventListener('scroll', updateThumbPosition);
 
     return () => {
+      // Clean up thumb dragging events
       thumb.removeEventListener('mousedown', handleMouseDownThumb);
       document.removeEventListener('mousemove', handleMouseMoveThumb);
-      document.removeEventListener('mouseup', handleMouseUpThumb);
+      document.removeEventListener('mouseup', handleMouseUp);
 
+      // Clean up slider dragging events
+      slider.removeEventListener('mousedown', handleMouseDownSlider);
+      document.removeEventListener('mousemove', handleMouseMoveSlider);
+      document.removeEventListener('mouseup', handleMouseUp);
+
+      // Clean up touch events
       thumb.removeEventListener('touchstart', handleMouseDownThumb);
       document.removeEventListener('touchmove', handleMouseMoveThumb);
-      document.removeEventListener('touchend', handleMouseUpThumb);
+      document.removeEventListener('touchend', handleMouseUp);
 
+      slider.removeEventListener('touchstart', handleMouseDownSlider);
+      document.removeEventListener('touchmove', handleMouseMoveSlider);
+      document.removeEventListener('touchend', handleMouseUp);
+
+      // Clean up scroll event
       slider.removeEventListener('scroll', updateThumbPosition);
     };
   }, []);
@@ -180,8 +233,61 @@ export default function TutorCenter() {
           </h2>
         </div>
         <div className='container__right-sided'>
-          <div className='slider slider-light' ref={sliderRef}>
+          <div className='slider' ref={sliderRef}>
             <div className='slider__container'>
+              <div className='advice-item bg-[#727EFC]'>
+                <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>
+                  Англійська мова
+                </h4>
+                <ul className='tutor-cards-list'>
+                  <li>Поліпшить успішність в школі</li>
+                  <li>Допоможе підготуватися до іспитів і олімпіад</li>
+                  <li>Розвине здатність вільно говорити, читати і писати англійською мовою</li>
+                </ul>
+              </div>
+              <div className='advice-item bg-[#FFB400]'>
+                <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>
+                  Українська мова
+                </h4>
+                <ul className='tutor-cards-list'>
+                  <li>Поліпшить успішність в школі</li>
+                  <li>Допоможе підготуватися до іспитів і олімпіад</li>
+                  <li>Розвине здатність вільно говорити, читати і писати українською мовою</li>
+                </ul>
+              </div>
+              <div className='advice-item bg-[#EF6936]'>
+                <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>Математика</h4>
+                <ul className='tutor-cards-list'>
+                  <li>Поліпшить успішність в школі</li>
+                  <li>Усуне прогалини в знаннях</li>
+                  <li>Відродить інтерес до математики в цілому</li>
+                  <li>Дозволить придбати глибокі знання, які не дають в школі</li>
+                  <li>Допоможе швидко і без стресу підготуватися до іспитів і олімпіад</li>
+                </ul>
+              </div>
+              <div className='advice-item bg-[#3EA397]'>
+                <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>
+                  Природничі дисципліни
+                </h4>
+                <ul className='tutor-cards-list'>
+                  <li>Поліпшить успішність в школі</li>
+                  <li>Усуне прогалини в знаннях</li>
+                  <li>Відродить інтерес до дисципліни в цілому</li>
+                  <li>Дозволить придбати глибокі знання, які не дають в школі</li>
+                  <li>Допоможе швидко і без стресу підготуватися до іспитів і олімпіад</li>
+                </ul>
+              </div>
+              <div className='advice-item bg-[#1A1E4E]'>
+                <h4 className='relative text-white text-xl xs:text-[1.5rem]'>
+                  Курс захоплюючої інформатики
+                  <p className='font-bold block text-white'>"КіберХаб"</p>
+                </h4>
+                <ul className='tutor-cards-list'>
+                  <li>З інформаційними навичками діти зануряться у кібер майбутнє</li>
+                  <li>Ознайомляться з поняттями інформаційної безпеки</li>
+                  <li>Заняття 2 рази на тиждень. Графік по домовленності.</li>
+                </ul>
+              </div>
               <div className='advice-item bg-[#727EFC]'>
                 <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>
                   Англійська мова

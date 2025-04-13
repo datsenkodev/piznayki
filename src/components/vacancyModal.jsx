@@ -7,10 +7,10 @@ import Link from 'next/link';
 
 import { sendEmail } from 'lib/resend';
 
-import application from 'public/images/application.png';
+import vacancy from 'public/images/vacancy.jpg';
 
-export default function Application() {
-  const [selected, setSelected] = useState('Дитячий садок');
+export default function Vacancy() {
+  const [selected, setSelected] = useState('Вчитель початкових класів');
 
   const [userName, setUserName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -49,7 +49,7 @@ export default function Application() {
       return false;
     }
     if (!/^\+?\d+$/.test(phoneNumber)) {
-      showToast('Номер телефону має містити лише цифри або "+"!', 'error');
+      showToast('Номер телефону має містити лише цифри і "+"!', 'error');
       return false;
     }
     return true;
@@ -60,7 +60,7 @@ export default function Application() {
     if (!validateInputs()) return;
 
     try {
-      await sendEmail({ modalType: 'Анкета', selected, userName, phoneNumber, additional });
+      await sendEmail({ modalType: 'Вакансії', selected, userName, phoneNumber, additional });
       showToast('Заявка успішно відправлена!', 'success');
       setUserName('');
       setPhoneNumber('');
@@ -73,36 +73,42 @@ export default function Application() {
   return (
     <div className='flex gap-13'>
       {toast.visible && <div className={`toast ${toast.type}`}>{toast.message}</div>}
-      <div className='rounded-lg overflow-hidden hidden md:block'>
+      <div className='rounded-lg overflow-hidden hidden 880:block max-w-[280px]'>
         <Image
-          src={application}
-          alt='Щасливі діти на траві'
-          style={{ height: '100%', objectFit: 'cover' }}
+          src={vacancy}
+          alt='Викладач'
+          style={{ height: '100%', objectFit: 'cover', objectPosition: 'center' }}
         />
       </div>
       <div className='max-w-full'>
         <h3 className='border-b border-gray-300 mb-4 sm:mb-8 pb-4 sm:pb-8 text-[clamp(1.5rem,_1.3333rem_+_0.7407vw,_2rem)]'>
-          <span>Заявка на навчання дитини</span>
+          <span>Доступні вакансії</span>
         </h3>
         <p className='mb-2'>Що вас цікавить?</p>
-        <ul className='flex flex-wrap justify-center gap-1 p-1 bg-[#eee] rounded-md text-center'>
-          {['Дитячий садок', 'Початкова школа', 'Середня школа', 'Репетиторський центр'].map(
-            (item) => (
-              <li
-                key={item}
-                className={`application-select ${selected === item ? 'selected' : ''}`}
-                onClick={() => handleSelect(item)}>
-                {item.split(' ').map((word, index) => (
-                  <span key={index}>
-                    {word}
-                    <br />
-                  </span>
-                ))}
-              </li>
-            ),
-          )}
+        <ul className='flex flex-wrap justify-center gap-1 p-1 mb-1 bg-[#eee] rounded-md text-center'>
+          {['Вчитель початкових класів', 'Вчитель середньої школи', 'Вихователь '].map((item) => (
+            <li
+              key={item}
+              className={`application-select max-w-[210px] ${selected === item ? 'selected' : ''}`}
+              onClick={() => handleSelect(item)}>
+              <span>
+                {item}
+                <br />
+              </span>
+            </li>
+          ))}
         </ul>
-        <p className='mb-2 mt-4 sm:mt-8 pt-4 sm:pt-8  border-t border-gray-300'>
+        <ul className='flex flex-wrap justify-center gap-1 p-1 bg-[#eee] rounded-md text-center'>
+          {['Няня у садок', 'Адміністратор у школу ', 'Керівник гуртка'].map((item) => (
+            <li
+              key={item}
+              className={`application-select ${selected === item ? 'selected' : ''}`}
+              onClick={() => handleSelect(item)}>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <p className='mb-2 mt-4 sm:mt-8 pt-4 sm:pt-8 border-t border-gray-300'>
           Залиште свої контакти - ми вам зателефонуємо!
         </p>
         <form onSubmit={send}>
@@ -147,6 +153,18 @@ export default function Application() {
               Є додаткове питання? Напишіть його нам!
             </label>
           </div>
+
+          <div className='mt-4 sm:mt-8 pt-4 sm:pt-8 border-t border-gray-300'>
+            <p className='max-w-[550px]'>
+              Для швидшого розгляду вашої кандидатури , надішліть резюме на електронну адресу{' '}
+              <Link
+                href={'mailto:piznayko123@gmail.com'}
+                className='text-[var(--accentColor)] underline-offset-4 hover:underline'>
+                piznayko123@gmail.com
+              </Link>
+            </p>
+          </div>
+
           <div className='flex flex-wrap justify-center 880:justify-start items-center gap-2 mt-4 sm:mt-8 pt-4 sm:pt-8 border-t border-gray-300'>
             <button className='accent-button' type='submit'>
               Відправити заявку

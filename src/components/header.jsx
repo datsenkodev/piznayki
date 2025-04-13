@@ -10,6 +10,7 @@ import logo from 'public/images/logo.png';
 
 import Modal from './modal';
 import Application from './applicationModal';
+import Vacancy from './vacancyModal';
 
 export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -84,9 +85,9 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <Link href='/' className='header-link'>
-                  Вакансії
-                </Link>
+                <Modal trigger={<button className='header-link'>Вакансії</button>}>
+                  <Vacancy />
+                </Modal>
               </li>
               <li>
                 <Link
@@ -97,9 +98,7 @@ export default function Header() {
               </li>
             </ul>
           </nav>
-          <Modal
-            // dataClass='big-modal'
-            trigger={<button className='accent-button'>Анкета для вступу</button>}>
+          <Modal trigger={<button className='accent-button'>Анкета для вступу</button>}>
             <Application />
           </Modal>
         </div>

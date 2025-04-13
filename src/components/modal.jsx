@@ -29,7 +29,7 @@ function ModalContent({ isOpen, onClose, children, dataClass }) {
   return (
     <dialog
       ref={modalRef}
-      className={`modal ${dataClass}`}
+      className={`modal ${dataClass ? dataClass : ''}`}
       onCancel={onClose} // Handle the Escape key to close the modal
     >
       {children}

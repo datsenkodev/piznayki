@@ -50,9 +50,10 @@ export default function About() {
   // Slider dragging logic
   const handleMouseDownSlider = (e) => {
     isDraggingSlider = true;
-    startX = e.pageX - sliderRef.current.offsetLeft;
-    scrollLeft = sliderRef.current.scrollLeft;
-    sliderRef.current.style.cursor = 'grabbing';
+    startX = e.clientX || (e.touches && e.touches[0].clientX);
+    scrollLeft = parseInt(thumbRef.current.style.left, 10) || 0;
+    document.body.style.userSelect = 'none';
+    thumbRef.current.style.cursor = 'grabbing';
     e.preventDefault();
   };
 
@@ -67,6 +68,7 @@ export default function About() {
 
   const handleMouseUpSlider = () => {
     isDraggingSlider = false;
+    document.body.style.userSelect = '';
     sliderRef.current.style.cursor = 'grab';
   };
 
@@ -137,7 +139,17 @@ export default function About() {
     slider.addEventListener('mouseup', handleMouseUpSlider);
     slider.addEventListener('mouseleave', handleMouseUpSlider);
 
+    thumb.addEventListener('touchstart', handleMouseDownThumb);
+    document.addEventListener('touchmove', handleMouseMoveThumb);
+    document.addEventListener('touchend', handleMouseUpThumb);
+
+    slider.addEventListener('scroll', updateThumbPosition);
+
     return () => {
+      thumb.removeEventListener('mousedown', handleMouseDownThumb);
+      document.removeEventListener('mousemove', handleMouseMoveThumb);
+      document.removeEventListener('mouseup', handleMouseUpThumb);
+
       thumb.removeEventListener('mousedown', handleMouseDownThumb);
       document.removeEventListener('mousemove', handleMouseMoveThumb);
       document.removeEventListener('mouseup', handleMouseUpThumb);
@@ -146,6 +158,8 @@ export default function About() {
       slider.removeEventListener('mousemove', handleMouseMoveSlider);
       slider.removeEventListener('mouseup', handleMouseUpSlider);
       slider.removeEventListener('mouseleave', handleMouseUpSlider);
+
+      slider.removeEventListener('scroll', updateThumbPosition);
     };
   }, []);
 

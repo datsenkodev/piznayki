@@ -6,6 +6,8 @@ import facebook from 'public/images/icons/facebook.svg';
 import instagram from 'public/images/icons/instagram.svg';
 import phone from 'public/images/icons/phone.svg';
 import mail from 'public/images/icons/mail.svg';
+import Vacancy from './vacancyModal';
+import Modal from './modal';
 
 export default function Footer() {
   return (
@@ -50,28 +52,44 @@ export default function Footer() {
           <nav className='footer-nav'>
             <ul className='footer-list'>
               <li>
-                <Link href={'/'}>Головна</Link>
+                <Link href={'/'} className='footer-link'>
+                  Головна
+                </Link>
               </li>
               <li>
-                <Link href={'/about'}>Про нас</Link>
+                <Link href={'/about'} className='footer-link'>
+                  Про нас
+                </Link>
               </li>
               <li>
-                <Link href={'/'}>Вакансії</Link>
+                <Modal trigger={<button className='footer-link'>Вакансії</button>}>
+                  <Vacancy />
+                </Modal>
               </li>
               <li>
-                <Link href={'/contacts'}>Контакти</Link>
+                <Link href={'/contacts'} className='footer-link'>
+                  Контакти
+                </Link>
               </li>
               <li>
-                <Link href={'/kindergarten'}>Дитячий садок</Link>
+                <Link href={'/kindergarten'} className='footer-link'>
+                  Дитячий садок
+                </Link>
               </li>
               <li>
-                <Link href={'/primary-school'}>Початкова школа</Link>
+                <Link href={'/primary-school'} className='footer-link'>
+                  Початкова школа
+                </Link>
               </li>
               <li>
-                <Link href={'/middle-school'}>Середня школа</Link>
+                <Link href={'/middle-school'} className='footer-link'>
+                  Середня школа
+                </Link>
               </li>
               <li>
-                <Link href={'/tutor-center'}>Репетиторський центр</Link>
+                <Link href={'/tutor-center'} className='footer-link'>
+                  Репетиторський центр
+                </Link>
               </li>
             </ul>
           </nav>
