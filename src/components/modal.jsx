@@ -7,16 +7,16 @@ function ModalContent({ isOpen, onClose, children, dataClass }) {
 
   useEffect(() => {
     if (isOpen) {
-      modalRef.current?.showModal(); // Open the dialog
+      modalRef.current?.showModal();
     } else {
-      modalRef.current?.close(); // Close the dialog
+      modalRef.current?.close();
     }
   }, [isOpen]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (modalRef.current && e.target === modalRef.current) {
-        onClose(); // Close the modal if the backdrop is clicked
+        onClose();
       }
     };
 
@@ -32,11 +32,11 @@ function ModalContent({ isOpen, onClose, children, dataClass }) {
       className={`modal ${dataClass ? dataClass : ''}`}
       onCancel={onClose} // Handle the Escape key to close the modal
     >
-      {children}
       <button className='close-btn' onClick={onClose}>
         <span></span>
         <span></span>
       </button>
+      {children}
     </dialog>
   );
 }

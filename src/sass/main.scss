@@ -95,6 +95,11 @@ footer {
   }
 }
 
+.no-scroll {
+  overflow: hidden;
+  max-height: 100svh;
+}
+
 .accent-button {
   border-radius: 3.12rem;
   padding: 0.81rem 1.25rem;
@@ -324,7 +329,7 @@ header .accent-button {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
   border-radius: 0 0 0.5rem 0.5rem;
   padding: 0.5rem;
   width: max-content;
@@ -354,7 +359,7 @@ header .accent-button {
 
 @media (max-width: 1024px) {
   .header-menu {
-    position: absolute;
+    position: fixed;
     right: 0;
     transform: translateX(100%);
     top: 93px;
@@ -392,7 +397,7 @@ header .accent-button {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 1.5rem;
     padding: 0;
     position: static;
     opacity: 1;
@@ -564,7 +569,8 @@ header .accent-button {
   width: max-content;
   padding: 2rem;
   opacity: 0;
-  overflow: clip;
+  overflow-y: scroll;
+  text-align: left;
 
   transition-property: display, opacity;
 
@@ -659,7 +665,7 @@ header .accent-button {
   padding-block: 13rem;
   & .message-text {
     & h2,
-    & h3 {
+    & > h3 {
       position: relative;
       z-index: 1;
     }
@@ -1133,6 +1139,8 @@ header .accent-button {
     font-weight: 400;
     font-size: clamp(0.75rem, 0.6361rem + 0.5063vw, 1rem);
     color: $whiteLightColor;
+    line-height: 150%;
+    display: block;
   }
 }
 

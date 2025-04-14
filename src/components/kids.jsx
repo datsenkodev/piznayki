@@ -21,7 +21,7 @@ export default function Kids() {
           aria-hidden
           quality={100}
           fill
-          style={{ objectPosition: '0 40%', objectFit: 'cover' }}
+          style={{ objectPosition: '50% 40%', objectFit: 'cover' }}
         />
       </section>
       <section className='kids'>

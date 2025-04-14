@@ -27,10 +27,12 @@ export default function Header() {
 
   const toggleHeader = () => {
     setIsHeaderOpen(!isHeaderOpen);
+    document.body.classList.toggle('no-scroll', !isHeaderOpen);
   };
 
   const closeHeader = () => {
     setIsHeaderOpen(false);
+    document.body.classList.remove('no-scroll');
   };
 
   useEffect(() => {
@@ -122,6 +124,16 @@ export default function Header() {
                     <span>Початкова школа</span>
                   </Link>
                 </div>
+              </li>
+              <li className='block lg:hidden'>
+                <Link
+                  href={'/tutor-center'}
+                  className={`header-link ${pathname == '/tutor-center' ? 'active' : ''}`}
+                  onClick={() => {
+                    closeHeader();
+                  }}>
+                  <span>Репетиторський центр</span>
+                </Link>
               </li>
               <li>
                 <Link
