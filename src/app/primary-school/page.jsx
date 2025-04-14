@@ -1,10 +1,13 @@
 'use client';
 
-import { useRef, useEffect, memo } from 'react';
+import { memo } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
+import Slider from '@components/Slider';
+import Modal from '@components/modal';
+import Application from '@components/applicationModal';
 import Kids from '@components/kids';
 
 import twemoji from 'twemoji';
@@ -23,97 +26,6 @@ import hero2 from 'public/images/primary/hero2.png';
 import hero3 from 'public/images/primary/hero3.png';
 
 export default function PrimarySchool() {
-  const sliderRef = useRef(null);
-  const scrollbarRef = useRef(null);
-  const thumbRef = useRef(null);
-
-  let isDraggingThumb = false;
-  let startX = 0;
-  let scrollLeft = 0;
-
-  // Thumb dragging logic
-  const handleMouseDownThumb = (e) => {
-    isDraggingThumb = true;
-    startX = e.clientX || e.touches[0].clientX;
-    scrollLeft = parseInt(thumbRef.current.style.left, 10) || 0;
-    document.body.style.userSelect = 'none';
-    thumbRef.current.style.cursor = 'grabbing';
-    e.preventDefault();
-  };
-
-  const handleMouseMoveThumb = (e) => {
-    if (!isDraggingThumb) return;
-
-    const clientX = e.clientX || e.touches[0].clientX;
-    const deltaX = clientX - startX;
-    const scrollbar = scrollbarRef.current;
-    const thumb = thumbRef.current;
-
-    const newLeft = Math.min(
-      Math.max(0, scrollLeft + deltaX),
-      scrollbar.clientWidth - thumb.offsetWidth,
-    );
-
-    thumb.style.left = `${newLeft}px`;
-
-    const slider = sliderRef.current;
-    const scrollWidth = slider.scrollWidth - slider.clientWidth;
-    slider.scrollLeft = (newLeft / (scrollbar.clientWidth - thumb.offsetWidth)) * scrollWidth;
-  };
-
-  const handleMouseUpThumb = () => {
-    isDraggingThumb = false;
-    document.body.style.userSelect = '';
-    thumbRef.current.style.cursor = 'grab';
-  };
-
-  // Update thumb position based on slider scroll
-  const updateThumbPosition = () => {
-    const slider = sliderRef.current;
-    const scrollbar = scrollbarRef.current;
-    const thumb = thumbRef.current;
-
-    const scrollLeft = slider.scrollLeft;
-    const scrollWidth = slider.scrollWidth - slider.clientWidth;
-    const thumbWidth = (slider.clientWidth / slider.scrollWidth) * scrollbar.clientWidth;
-
-    thumb.style.width = `${thumbWidth}px`;
-    thumb.style.left = `${(scrollLeft / scrollWidth) * (scrollbar.clientWidth - thumbWidth)}px`;
-  };
-
-  useEffect(() => {
-    const slider = sliderRef.current;
-    const thumb = thumbRef.current;
-
-    // Initialize thumb position
-    updateThumbPosition();
-
-    // Add event listeners for thumb dragging (mouse)
-    thumb.addEventListener('mousedown', handleMouseDownThumb);
-    document.addEventListener('mousemove', handleMouseMoveThumb);
-    document.addEventListener('mouseup', handleMouseUpThumb);
-
-    // Add event listeners for thumb dragging (touch)
-    thumb.addEventListener('touchstart', handleMouseDownThumb);
-    document.addEventListener('touchmove', handleMouseMoveThumb);
-    document.addEventListener('touchend', handleMouseUpThumb);
-
-    // Add event listeners for slider scroll
-    slider.addEventListener('scroll', updateThumbPosition);
-
-    return () => {
-      thumb.removeEventListener('mousedown', handleMouseDownThumb);
-      document.removeEventListener('mousemove', handleMouseMoveThumb);
-      document.removeEventListener('mouseup', handleMouseUpThumb);
-
-      thumb.removeEventListener('touchstart', handleMouseDownThumb);
-      document.removeEventListener('touchmove', handleMouseMoveThumb);
-      document.removeEventListener('touchend', handleMouseUpThumb);
-
-      slider.removeEventListener('scroll', updateThumbPosition);
-    };
-  }, []);
-
   return (
     <main className='primary-school'>
       <section className='hero-page'>
@@ -140,39 +52,32 @@ export default function PrimarySchool() {
             </Link>
             <p className='page-subtitle'>Повне забезпечення дітей канцелярією та підручниками</p>
             <div className='flex flex-col md:flex-row items-center md:items-stretch gap-4'>
-              <button className='accent-button'>Анкета для вступу</button>
+              <Modal trigger={<button className='accent-button'>Анкета для вступу</button>}>
+                <Application />
+              </Modal>
               <Link className='page-anchor' href={'#page-content'}>
-                Детальніше про садок
+                Детальніше про школу
               </Link>
             </div>
           </div>
         </div>
-        <div className='container__right-sided'>
-          <div className='slider slider-light' ref={sliderRef}>
-            <div className='slider__container'>
-              <div className='slider__item'>
-                <Image src={slider1} alt='Щасливі діти' />
-              </div>
-              <div className='slider__item'>
-                <Image src={slider2} alt='Щасливі діти' />
-              </div>
-              <div className='slider__item'>
-                <Image src={slider3} alt='Щасливі діти' />
-              </div>
-              <div className='slider__item'>
-                <Image src={slider4} alt='Щасливі діти' />
-              </div>
-              <div className='slider__item'>
-                <Image src={slider5} alt='Щасливі діти' />
-              </div>
-            </div>
+        <Slider>
+          <div className='slider__item'>
+            <Image src={slider1} alt='Щасливі діти' />
           </div>
-        </div>
-        <div className='container relative'>
-          <div className='custom-scrollbar' ref={scrollbarRef}>
-            <div className='custom-thumb' ref={thumbRef}></div>
+          <div className='slider__item'>
+            <Image src={slider2} alt='Щасливі діти' />
           </div>
-        </div>
+          <div className='slider__item'>
+            <Image src={slider3} alt='Щасливі діти' />
+          </div>
+          <div className='slider__item'>
+            <Image src={slider4} alt='Щасливі діти' />
+          </div>
+          <div className='slider__item'>
+            <Image src={slider5} alt='Щасливі діти' />
+          </div>
+        </Slider>
       </section>
       <section className='page-content' id='page-content'>
         <div className='container'>

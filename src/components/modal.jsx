@@ -29,7 +29,7 @@ function ModalContent({ isOpen, onClose, children, dataClass }) {
   return (
     <dialog
       ref={modalRef}
-      className={`modal ${dataClass}`}
+      className={`modal ${dataClass ? dataClass : ''}`}
       onCancel={onClose} // Handle the Escape key to close the modal
     >
       {children}
@@ -49,7 +49,7 @@ export default function Modal({ trigger, children, dataClass }) {
 
   return (
     <>
-      <div onClick={openModal} style={{ cursor: 'pointer' }}>
+      <div onClick={openModal} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
         {trigger}
       </div>
       <ModalContent dataClass={dataClass} isOpen={isModalOpen} onClose={closeModal}>

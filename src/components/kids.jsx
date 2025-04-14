@@ -8,6 +8,8 @@ import puzzleYellow from 'public/images/icons/puzzle-yellow.svg';
 import puzzleOrange from 'public/images/icons/puzzle-orange.svg';
 import puzzlePiece from 'public/images/icons/puzzle-piece.svg';
 import circle from 'public/images/icons/circle-yellow.svg';
+import Modal from './modal';
+import Application from './applicationModal';
 
 export default function Kids() {
   return (
@@ -38,7 +40,9 @@ export default function Kids() {
               Вже побували у нас,<span> залишайте заявку і Ви!</span>
             </h3>
             <div className='flex flex-col md:flex-row gap-[0.625rem] md:gap-4 mt-12 relative z-1'>
-              <button className='accent-button'>Анкета для вступу</button>
+              <Modal trigger={<button className='accent-button'>Анкета для вступу</button>}>
+                <Application />
+              </Modal>
               <Link href='tel:+380973383431' className='btn-outlined'>
                 <span className='text-[#7f7f90] font-normal block text-[1rem]'>
                   Або телефонуйте за номером:

@@ -1,108 +1,19 @@
-'use client';
-
-import { useRef, useEffect } from 'react';
-
 import Image from 'next/image';
 import Link from 'next/link';
 
 import adviceArrow from 'public/images/icons/arrow-right-bottom.svg';
-import advice1 from 'public/images/advice1.jpg';
-import advice2 from 'public/images/advice2.jpg';
-import advice3 from 'public/images/advice3.jpg';
-import advice4 from 'public/images/advice4.jpg';
+import advice1 from 'public/images/advices/advice1.jpg';
+import advice2 from 'public/images/advices/advice2.png';
+import advice3 from 'public/images/advices/advice3.png';
+import advice4 from 'public/images/advices/advice4.jpg';
+import advice5 from 'public/images/advices/advice5.png';
+import advice6 from 'public/images/advices/advice6.png';
+import advice7 from 'public/images/advices/advice7.png';
+import advice8 from 'public/images/advices/advice8.png';
+import advice9 from 'public/images/advices/advice9.png';
+import Slider from '@/components/Slider';
 
 export default function Advices() {
-  const sliderRef = useRef(null);
-  const scrollbarRef = useRef(null);
-  const thumbRef = useRef(null);
-
-  let isDraggingThumb = false;
-  let startX = 0;
-  let scrollLeft = 0;
-
-  // Thumb dragging logic
-  const handleMouseDownThumb = (e) => {
-    isDraggingThumb = true;
-    startX = e.clientX || e.touches[0].clientX;
-    scrollLeft = parseInt(thumbRef.current.style.left, 10) || 0;
-    document.body.style.userSelect = 'none';
-    thumbRef.current.style.cursor = 'grabbing';
-    e.preventDefault();
-  };
-
-  const handleMouseMoveThumb = (e) => {
-    if (!isDraggingThumb) return;
-
-    const clientX = e.clientX || e.touches[0].clientX;
-    const deltaX = clientX - startX;
-    const scrollbar = scrollbarRef.current;
-    const thumb = thumbRef.current;
-
-    const newLeft = Math.min(
-      Math.max(0, scrollLeft + deltaX),
-      scrollbar.clientWidth - thumb.offsetWidth,
-    );
-
-    thumb.style.left = `${newLeft}px`;
-
-    const slider = sliderRef.current;
-    const scrollWidth = slider.scrollWidth - slider.clientWidth;
-    slider.scrollLeft = (newLeft / (scrollbar.clientWidth - thumb.offsetWidth)) * scrollWidth;
-  };
-
-  const handleMouseUpThumb = () => {
-    isDraggingThumb = false;
-    document.body.style.userSelect = '';
-    thumbRef.current.style.cursor = 'grab';
-  };
-
-  // Update thumb position based on slider scroll
-  const updateThumbPosition = () => {
-    const slider = sliderRef.current;
-    const scrollbar = scrollbarRef.current;
-    const thumb = thumbRef.current;
-
-    const scrollLeft = slider.scrollLeft;
-    const scrollWidth = slider.scrollWidth - slider.clientWidth;
-    const thumbWidth = (slider.clientWidth / slider.scrollWidth) * scrollbar.clientWidth;
-
-    thumb.style.width = `${thumbWidth}px`;
-    thumb.style.left = `${(scrollLeft / scrollWidth) * (scrollbar.clientWidth - thumbWidth)}px`;
-  };
-
-  useEffect(() => {
-    const slider = sliderRef.current;
-    const thumb = thumbRef.current;
-
-    // Initialize thumb position
-    updateThumbPosition();
-
-    // Add event listeners for thumb dragging (mouse)
-    thumb.addEventListener('mousedown', handleMouseDownThumb);
-    document.addEventListener('mousemove', handleMouseMoveThumb);
-    document.addEventListener('mouseup', handleMouseUpThumb);
-
-    // Add event listeners for thumb dragging (touch)
-    thumb.addEventListener('touchstart', handleMouseDownThumb);
-    document.addEventListener('touchmove', handleMouseMoveThumb);
-    document.addEventListener('touchend', handleMouseUpThumb);
-
-    // Add event listeners for slider scroll
-    slider.addEventListener('scroll', updateThumbPosition);
-
-    return () => {
-      thumb.removeEventListener('mousedown', handleMouseDownThumb);
-      document.removeEventListener('mousemove', handleMouseMoveThumb);
-      document.removeEventListener('mouseup', handleMouseUpThumb);
-
-      thumb.removeEventListener('touchstart', handleMouseDownThumb);
-      document.removeEventListener('touchmove', handleMouseMoveThumb);
-      document.removeEventListener('touchend', handleMouseUpThumb);
-
-      slider.removeEventListener('scroll', updateThumbPosition);
-    };
-  }, []);
-
   return (
     <section className='advices'>
       <div className='container'>
@@ -110,105 +21,152 @@ export default function Advices() {
           <span className='block uppercase'>Поради</span>для батькiв
         </h2>
       </div>
-      <div className='container__right-sided'>
-        <div className='slider slider-light' ref={sliderRef}>
-          <div className='slider__container'>
-            <Link className='advice-item bg-[#727EFC]' href={'/'}>
-              <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
-                Як батькам навчити дитину виявляти любов
-                <Image
-                  src={adviceArrow}
-                  alt='Посилання на пораду'
-                  className='absolute bottom-0 right-0'
-                />
-              </h4>
-              <Image src={advice1} alt='Щасливі діти' width={293} />
-            </Link>
-            <Link className='advice-item bg-[#FFB400]' href={'/'}>
-              <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
-                Гарні манери
-                <Image
-                  src={adviceArrow}
-                  alt='Посилання на пораду'
-                  className='absolute bottom-0 right-0'
-                />
-              </h4>
-              <Image src={advice2} alt='Щасливі діти' width={293} />
-            </Link>
-            <Link className='advice-item bg-[#EF6936]' href={'/'}>
-              <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
-                Домашні обов’язки, з якими впорається дитина
-                <Image
-                  src={adviceArrow}
-                  alt='Посилання на пораду'
-                  className='absolute bottom-0 right-0'
-                />
-              </h4>
-              <Image src={advice3} alt='Щасливі діти' width={293} />
-            </Link>
-            <Link className='advice-item bg-[#3EA397]' href={'/'}>
-              <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
-                Навчаємо дитину робити правильний вибір
-                <Image
-                  src={adviceArrow}
-                  alt='Посилання на пораду'
-                  className='absolute bottom-0 right-0'
-                />
-              </h4>
-              <Image src={advice4} alt='Щасливі діти' width={293} />
-            </Link>
-            <Link className='advice-item bg-[#727EFC]' href={'/'}>
-              <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
-                Як батькам навчити дитину виявляти любов
-                <Image
-                  src={adviceArrow}
-                  alt='Посилання на пораду'
-                  className='absolute bottom-0 right-0'
-                />
-              </h4>
-              <Image src={advice1} alt='Щасливі діти' width={293} />
-            </Link>
-            <Link className='advice-item bg-[#FFB400]' href={'/'}>
-              <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
-                Гарні манери
-                <Image
-                  src={adviceArrow}
-                  alt='Посилання на пораду'
-                  className='absolute bottom-0 right-0'
-                />
-              </h4>
-              <Image src={advice2} alt='Щасливі діти' width={293} />
-            </Link>
-            <Link className='advice-item bg-[#EF6936]' href={'/'}>
-              <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
-                Домашні обов’язки, з якими впорається дитина
-                <Image
-                  src={adviceArrow}
-                  alt='Посилання на пораду'
-                  className='absolute bottom-0 right-0'
-                />
-              </h4>
-              <Image src={advice3} alt='Щасливі діти' width={293} />
-            </Link>
-            <Link className='advice-item bg-[#3EA397]' href={'/'}>
-              <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
-                Навчаємо дитину робити правильний вибір
-                <Image
-                  src={adviceArrow}
-                  alt='Посилання на пораду'
-                  className='absolute bottom-0 right-0'
-                />
-              </h4>
-              <Image src={advice4} alt='Щасливі діти' width={293} />
-            </Link>
-          </div>
-        </div>
-      </div>
-      <div className='container relative'>
-        <div className='custom-scrollbar' ref={scrollbarRef}>
-          <div className='custom-thumb' ref={thumbRef}></div>
-        </div>
-      </div>
+      <Slider>
+        <Link
+          className='advice-item bg-[#727EFC]'
+          href={
+            'https://www.instagram.com/p/DIE07AAo3iH/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='
+          }
+          target='_blank'>
+          <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
+            Як батькам навчити дитину виявляти любов
+            <Image
+              src={adviceArrow}
+              alt='Посилання на пораду'
+              className='absolute bottom-0 right-0'
+            />
+          </h4>
+          <Image src={advice1} alt='Щасливі діти' width={293} />
+        </Link>
+        <Link
+          className='advice-item bg-[#FFB400]'
+          href={
+            'https://www.instagram.com/p/DIMRdQAoRTZ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='
+          }
+          target='_blank'>
+          <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
+            Як розмовляти з дитиною, щоб вона вас слухала
+            <Image
+              src={adviceArrow}
+              alt='Посилання на пораду'
+              className='absolute bottom-0 right-0'
+            />
+          </h4>
+          <Image src={advice2} alt='Щасливі діти' width={293} />
+        </Link>
+        <Link
+          className='advice-item bg-[#EF6936]'
+          href={
+            'https://www.instagram.com/p/DIHDBD5okss/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='
+          }
+          target='_blank'>
+          <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
+            Як розвинути моральні якості дитини
+            <Image
+              src={adviceArrow}
+              alt='Посилання на пораду'
+              className='absolute bottom-0 right-0'
+            />
+          </h4>
+          <Image src={advice3} alt='Щасливі діти' width={293} />
+        </Link>
+        <Link
+          className='advice-item bg-[#3EA397]'
+          href={
+            'https://www.instagram.com/p/DHiw34foruY/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='
+          }
+          target='_blank'>
+          <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
+            Навчаємо дитину робити правильний вибір
+            <Image
+              src={adviceArrow}
+              alt='Посилання на пораду'
+              className='absolute bottom-0 right-0'
+            />
+          </h4>
+          <Image src={advice4} alt='Щасливі діти' width={293} />
+        </Link>
+        <Link
+          className='advice-item bg-[#727EFC]'
+          href={
+            'https://www.instagram.com/p/DIY7JyfowiP/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='
+          }
+          target='_blank'>
+          <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
+            Як підвищити самооцінку та зміцнити впевненість у собі
+            <Image
+              src={adviceArrow}
+              alt='Посилання на пораду'
+              className='absolute bottom-0 right-0'
+            />
+          </h4>
+          <Image src={advice5} alt='Щасливі діти' width={293} />
+        </Link>
+        <Link
+          className='advice-item bg-[#FFB400]'
+          href={
+            'https://www.instagram.com/p/DHUZyCAoG0A/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='
+          }
+          target='_blank'>
+          <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
+            Дисциплінуємо дитину- поради батькам
+            <Image
+              src={adviceArrow}
+              alt='Посилання на пораду'
+              className='absolute bottom-0 right-0'
+            />
+          </h4>
+          <Image src={advice6} alt='Щасливі діти' width={293} />
+        </Link>
+        <Link
+          className='advice-item bg-[#EF6936]'
+          href={
+            'https://www.instagram.com/p/DIY6k93ohb5/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='
+          }
+          target='_blank'>
+          <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
+            8 порад для розвитку дитячої самостійності
+            <Image
+              src={adviceArrow}
+              alt='Посилання на пораду'
+              className='absolute bottom-0 right-0'
+            />
+          </h4>
+          <Image src={advice7} alt='Щасливі діти' width={293} />
+        </Link>
+        <Link
+          className='advice-item bg-[#3EA397]'
+          href={
+            'https://www.instagram.com/p/DHY75n_IrwR/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='
+          }
+          target='_blank'>
+          <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
+            Навчаємо дитину наполегливості й цілеспрямованості
+            <Image
+              src={adviceArrow}
+              alt='Посилання на пораду'
+              className='absolute bottom-0 right-0'
+            />
+          </h4>
+          <Image src={advice8} alt='Щасливі діти' width={293} />
+        </Link>
+        <Link
+          className='advice-item bg-[#727EFC]'
+          href={
+            'https://www.instagram.com/p/DH57OZqoJyo/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='
+          }
+          target='_blank'>
+          <h4 className='relative font-bold text-white text-xl xs:text-[1.5rem]'>
+            Необхідні навички для дитячого садочка
+            <Image
+              src={adviceArrow}
+              alt='Посилання на пораду'
+              className='absolute bottom-0 right-0'
+            />
+          </h4>
+          <Image src={advice9} alt='Щасливі діти' width={293} />
+        </Link>
+      </Slider>
       <div className='container flex flex-col gap-5 md:flex-row md:gap-6'>
         <p className='max-w-[280px] mt-10 md:my-[3.5rem_10rem]'>
           Більше корисної інформації ви можете знайти на нашій сторінці Instagram та Facebook
@@ -228,7 +186,7 @@ export default function Advices() {
             </svg>
             Facebook
           </Link>
-          <Link href='https://www.instagram.com/' className='inst' target='_blank'>
+          <Link href='https://www.instagram.com/piznayki/' className='inst' target='_blank'>
             <svg
               width='34'
               height='34'

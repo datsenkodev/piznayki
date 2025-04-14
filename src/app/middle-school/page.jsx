@@ -5,6 +5,8 @@ import { memo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import Modal from '@components/modal';
+import Application from '@components/applicationModal';
 import Kids from '@components/kids';
 
 import twemoji from 'twemoji';
@@ -38,7 +40,9 @@ export default function MiddleSchool() {
             </Link>
             <p className='page-subtitle'>Здобуття освіти разом з нами – мрія кожного!</p>
             <div className='flex flex-col md:flex-row items-center md:items-stretch gap-4'>
-              <button className='accent-button'>Анкета для вступу</button>
+              <Modal trigger={<button className='accent-button'>Анкета для вступу</button>}>
+                <Application />
+              </Modal>
               <Link className='page-anchor' href={'#page-content'}>
                 Детальніше про школу
               </Link>

@@ -1,10 +1,9 @@
-'use client';
-
-import { useRef, useEffect } from 'react';
-
 import Image from 'next/image';
 import Link from 'next/link';
 
+import Slider from '@components/Slider';
+import Modal from '@components/modal';
+import Application from '@components/applicationModal';
 import Kids from '@components/kids';
 
 import pin from 'public/images/icons/pin.svg';
@@ -12,98 +11,6 @@ import pin from 'public/images/icons/pin.svg';
 import heroBig from 'public/images/tutor/hero-big.png';
 
 export default function TutorCenter() {
-  const sliderRef = useRef(null);
-  const scrollbarRef = useRef(null);
-  const thumbRef = useRef(null);
-
-  let isDraggingSlider = false;
-  let isDraggingThumb = false;
-  let startX = 0;
-  let scrollLeft = 0;
-
-  // Thumb dragging logic
-  const handleMouseDownThumb = (e) => {
-    isDraggingThumb = true;
-    startX = e.clientX || e.touches[0].clientX;
-    scrollLeft = parseInt(thumbRef.current.style.left, 10) || 0;
-    document.body.style.userSelect = 'none';
-    thumbRef.current.style.cursor = 'grabbing';
-    e.preventDefault();
-  };
-
-  const handleMouseMoveThumb = (e) => {
-    if (!isDraggingThumb) return;
-
-    const clientX = e.clientX || e.touches[0].clientX;
-    const deltaX = clientX - startX;
-    const scrollbar = scrollbarRef.current;
-    const thumb = thumbRef.current;
-
-    const newLeft = Math.min(
-      Math.max(0, scrollLeft + deltaX),
-      scrollbar.clientWidth - thumb.offsetWidth,
-    );
-
-    thumb.style.left = `${newLeft}px`;
-
-    const slider = sliderRef.current;
-    const scrollWidth = slider.scrollWidth - slider.clientWidth;
-    slider.scrollLeft = (newLeft / (scrollbar.clientWidth - thumb.offsetWidth)) * scrollWidth;
-  };
-
-  const handleMouseUpThumb = () => {
-    isDraggingThumb = false;
-    document.body.style.userSelect = '';
-    thumbRef.current.style.cursor = 'grab';
-  };
-
-  // Update thumb position based on slider scroll
-  const updateThumbPosition = () => {
-    const slider = sliderRef.current;
-    const scrollbar = scrollbarRef.current;
-    const thumb = thumbRef.current;
-
-    const scrollLeft = slider.scrollLeft;
-    const scrollWidth = slider.scrollWidth - slider.clientWidth;
-    const thumbWidth = (slider.clientWidth / slider.scrollWidth) * scrollbar.clientWidth;
-
-    thumb.style.width = `${thumbWidth}px`;
-    thumb.style.left = `${(scrollLeft / scrollWidth) * (scrollbar.clientWidth - thumbWidth)}px`;
-  };
-
-  useEffect(() => {
-    const slider = sliderRef.current;
-    const thumb = thumbRef.current;
-
-    // Initialize thumb position
-    updateThumbPosition();
-
-    // Add event listeners for thumb dragging (mouse)
-    thumb.addEventListener('mousedown', handleMouseDownThumb);
-    document.addEventListener('mousemove', handleMouseMoveThumb);
-    document.addEventListener('mouseup', handleMouseUpThumb);
-
-    // Add event listeners for thumb dragging (touch)
-    thumb.addEventListener('touchstart', handleMouseDownThumb);
-    document.addEventListener('touchmove', handleMouseMoveThumb);
-    document.addEventListener('touchend', handleMouseUpThumb);
-
-    // Add event listeners for slider scroll
-    slider.addEventListener('scroll', updateThumbPosition);
-
-    return () => {
-      thumb.removeEventListener('mousedown', handleMouseDownThumb);
-      document.removeEventListener('mousemove', handleMouseMoveThumb);
-      document.removeEventListener('mouseup', handleMouseUpThumb);
-
-      thumb.removeEventListener('touchstart', handleMouseDownThumb);
-      document.removeEventListener('touchmove', handleMouseMoveThumb);
-      document.removeEventListener('touchend', handleMouseUpThumb);
-
-      slider.removeEventListener('scroll', updateThumbPosition);
-    };
-  }, []);
-
   return (
     <main className='tutor'>
       <section className='hero-page'>
@@ -124,7 +31,9 @@ export default function TutorCenter() {
               майбутнього успіху кожного здобувача освіти
             </p>
             <div className='flex flex-col md:flex-row items-center md:items-stretch gap-4'>
-              <button className='accent-button'>Анкета для вступу</button>
+              <Modal trigger={<button className='accent-button'>Анкета для вступу</button>}>
+                <Application />
+              </Modal>
               <Link className='page-anchor' href={'#page-content'}>
                 Детальніше про центр
               </Link>
@@ -179,70 +88,114 @@ export default function TutorCenter() {
             Репетитор для учнів <span>5-11 класів</span>
           </h2>
         </div>
-        <div className='container__right-sided'>
-          <div className='slider slider-light' ref={sliderRef}>
-            <div className='slider__container'>
-              <div className='advice-item bg-[#727EFC]'>
-                <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>
-                  Англійська мова
-                </h4>
-                <ul className='tutor-cards-list'>
-                  <li>Поліпшить успішність в школі</li>
-                  <li>Допоможе підготуватися до іспитів і олімпіад</li>
-                  <li>Розвине здатність вільно говорити, читати і писати англійською мовою</li>
-                </ul>
-              </div>
-              <div className='advice-item bg-[#FFB400]'>
-                <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>
-                  Українська мова
-                </h4>
-                <ul className='tutor-cards-list'>
-                  <li>Поліпшить успішність в школі</li>
-                  <li>Допоможе підготуватися до іспитів і олімпіад</li>
-                  <li>Розвине здатність вільно говорити, читати і писати українською мовою</li>
-                </ul>
-              </div>
-              <div className='advice-item bg-[#EF6936]'>
-                <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>Математика</h4>
-                <ul className='tutor-cards-list'>
-                  <li>Поліпшить успішність в школі</li>
-                  <li>Усуне прогалини в знаннях</li>
-                  <li>Відродить інтерес до математики в цілому</li>
-                  <li>Дозволить придбати глибокі знання, які не дають в школі</li>
-                  <li>Допоможе швидко і без стресу підготуватися до іспитів і олімпіад</li>
-                </ul>
-              </div>
-              <div className='advice-item bg-[#3EA397]'>
-                <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>
-                  Природничі дисципліни
-                </h4>
-                <ul className='tutor-cards-list'>
-                  <li>Поліпшить успішність в школі</li>
-                  <li>Усуне прогалини в знаннях</li>
-                  <li>Відродить інтерес до дисципліни в цілому</li>
-                  <li>Дозволить придбати глибокі знання, які не дають в школі</li>
-                  <li>Допоможе швидко і без стресу підготуватися до іспитів і олімпіад</li>
-                </ul>
-              </div>
-              <div className='advice-item bg-[#1A1E4E]'>
-                <h4 className='relative text-white text-xl xs:text-[1.5rem]'>
-                  Курс захоплюючої інформатики
-                  <p className='font-bold block text-white'>"КіберХаб"</p>
-                </h4>
-                <ul className='tutor-cards-list'>
-                  <li>З інформаційними навичками діти зануряться у кібер майбутнє</li>
-                  <li>Ознайомляться з поняттями інформаційної безпеки</li>
-                  <li>Заняття 2 рази на тиждень. Графік по домовленності.</li>
-                </ul>
-              </div>
-            </div>
+        <Slider>
+          <div className='advice-item bg-[#727EFC]'>
+            <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>
+              Англійська мова
+            </h4>
+            <ul className='tutor-cards-list'>
+              <li>Поліпшить успішність в школі</li>
+              <li>Допоможе підготуватися до іспитів і олімпіад</li>
+              <li>Розвине здатність вільно говорити, читати і писати англійською мовою</li>
+            </ul>
           </div>
-        </div>
-        <div className='container relative'>
-          <div className='custom-scrollbar' ref={scrollbarRef}>
-            <div className='custom-thumb' ref={thumbRef}></div>
+          <div className='advice-item bg-[#FFB400]'>
+            <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>
+              Українська мова
+            </h4>
+            <ul className='tutor-cards-list'>
+              <li>Поліпшить успішність в школі</li>
+              <li>Допоможе підготуватися до іспитів і олімпіад</li>
+              <li>Розвине здатність вільно говорити, читати і писати українською мовою</li>
+            </ul>
           </div>
-        </div>
+          <div className='advice-item bg-[#EF6936]'>
+            <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>Математика</h4>
+            <ul className='tutor-cards-list'>
+              <li>Поліпшить успішність в школі</li>
+              <li>Усуне прогалини в знаннях</li>
+              <li>Відродить інтерес до математики в цілому</li>
+              <li>Дозволить придбати глибокі знання, які не дають в школі</li>
+              <li>Допоможе швидко і без стресу підготуватися до іспитів і олімпіад</li>
+            </ul>
+          </div>
+          <div className='advice-item bg-[#3EA397]'>
+            <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>
+              Природничі дисципліни
+            </h4>
+            <ul className='tutor-cards-list'>
+              <li>Поліпшить успішність в школі</li>
+              <li>Усуне прогалини в знаннях</li>
+              <li>Відродить інтерес до дисципліни в цілому</li>
+              <li>Дозволить придбати глибокі знання, які не дають в школі</li>
+              <li>Допоможе швидко і без стресу підготуватися до іспитів і олімпіад</li>
+            </ul>
+          </div>
+          <div className='advice-item bg-[#1A1E4E]'>
+            <h4 className='relative text-white text-xl xs:text-[1.5rem]'>
+              Курс захоплюючої інформатики
+              <p className='font-bold block text-white'>"КіберХаб"</p>
+            </h4>
+            <ul className='tutor-cards-list'>
+              <li>З інформаційними навичками діти зануряться у кібер майбутнє</li>
+              <li>Ознайомляться з поняттями інформаційної безпеки</li>
+              <li>Заняття 2 рази на тиждень. Графік по домовленності.</li>
+            </ul>
+          </div>
+          <div className='advice-item bg-[#727EFC]'>
+            <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>
+              Англійська мова
+            </h4>
+            <ul className='tutor-cards-list'>
+              <li>Поліпшить успішність в школі</li>
+              <li>Допоможе підготуватися до іспитів і олімпіад</li>
+              <li>Розвине здатність вільно говорити, читати і писати англійською мовою</li>
+            </ul>
+          </div>
+          <div className='advice-item bg-[#FFB400]'>
+            <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>
+              Українська мова
+            </h4>
+            <ul className='tutor-cards-list'>
+              <li>Поліпшить успішність в школі</li>
+              <li>Допоможе підготуватися до іспитів і олімпіад</li>
+              <li>Розвине здатність вільно говорити, читати і писати українською мовою</li>
+            </ul>
+          </div>
+          <div className='advice-item bg-[#EF6936]'>
+            <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>Математика</h4>
+            <ul className='tutor-cards-list'>
+              <li>Поліпшить успішність в школі</li>
+              <li>Усуне прогалини в знаннях</li>
+              <li>Відродить інтерес до математики в цілому</li>
+              <li>Дозволить придбати глибокі знання, які не дають в школі</li>
+              <li>Допоможе швидко і без стресу підготуватися до іспитів і олімпіад</li>
+            </ul>
+          </div>
+          <div className='advice-item bg-[#3EA397]'>
+            <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>
+              Природничі дисципліни
+            </h4>
+            <ul className='tutor-cards-list'>
+              <li>Поліпшить успішність в школі</li>
+              <li>Усуне прогалини в знаннях</li>
+              <li>Відродить інтерес до дисципліни в цілому</li>
+              <li>Дозволить придбати глибокі знання, які не дають в школі</li>
+              <li>Допоможе швидко і без стресу підготуватися до іспитів і олімпіад</li>
+            </ul>
+          </div>
+          <div className='advice-item bg-[#1A1E4E]'>
+            <h4 className='relative text-white text-xl xs:text-[1.5rem]'>
+              Курс захоплюючої інформатики
+              <p className='font-bold block text-white'>"КіберХаб"</p>
+            </h4>
+            <ul className='tutor-cards-list'>
+              <li>З інформаційними навичками діти зануряться у кібер майбутнє</li>
+              <li>Ознайомляться з поняттями інформаційної безпеки</li>
+              <li>Заняття 2 рази на тиждень. Графік по домовленності.</li>
+            </ul>
+          </div>
+        </Slider>
       </section>
       <Kids />
     </main>
