@@ -18,7 +18,7 @@ export const sendEmail = async ({ modalType, selected, userName, phoneNumber, ad
 
   await resend.emails.send({
     from: 'onboarding@resend.dev',
-    to: 'datsenkodev@gmail.com',
+    to: 'piznayko123@gmail.com',
     subject: `Пізнайки. Анкета`,
     html: htmlContent,
   });

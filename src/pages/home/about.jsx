@@ -1,8 +1,6 @@
-'use client';
-
-import { useRef, useEffect } from 'react';
-
 import Image from 'next/image';
+
+import Slider from '@components/Slider';
 
 import puzzleYellow from 'public/images/icons/puzzle-yellow.svg';
 
@@ -38,131 +36,6 @@ import feedback9 from 'public/images/feedback9.png';
 import stars from 'public/images/icons/5stars.png';
 
 export default function About() {
-  const sliderRef = useRef(null);
-  const scrollbarRef = useRef(null);
-  const thumbRef = useRef(null);
-
-  let isDraggingSlider = false;
-  let isDraggingThumb = false;
-  let startX = 0;
-  let scrollLeft = 0;
-
-  // Slider dragging logic
-  const handleMouseDownSlider = (e) => {
-    isDraggingSlider = true;
-    startX = e.clientX || (e.touches && e.touches[0].clientX);
-    scrollLeft = parseInt(thumbRef.current.style.left, 10) || 0;
-    document.body.style.userSelect = 'none';
-    thumbRef.current.style.cursor = 'grabbing';
-    e.preventDefault();
-  };
-
-  const handleMouseMoveSlider = (e) => {
-    if (!isDraggingSlider) return;
-    e.preventDefault();
-    const x = e.pageX - sliderRef.current.offsetLeft;
-    const walk = x - startX;
-    sliderRef.current.scrollLeft = scrollLeft - walk;
-    updateThumbPosition();
-  };
-
-  const handleMouseUpSlider = () => {
-    isDraggingSlider = false;
-    document.body.style.userSelect = '';
-    sliderRef.current.style.cursor = 'grab';
-  };
-
-  // Thumb dragging logic
-  const handleMouseDownThumb = (e) => {
-    isDraggingThumb = true;
-    startX = e.clientX;
-    scrollLeft = parseInt(thumbRef.current.style.left, 10) || 0;
-    document.body.style.userSelect = 'none'; // Prevent text selection
-    thumbRef.current.style.cursor = 'grabbing';
-    e.preventDefault();
-  };
-
-  const handleMouseMoveThumb = (e) => {
-    if (!isDraggingThumb) return;
-
-    const deltaX = e.clientX - startX;
-    const scrollbar = scrollbarRef.current;
-    const thumb = thumbRef.current;
-
-    const newLeft = Math.min(
-      Math.max(0, scrollLeft + deltaX),
-      scrollbar.clientWidth - thumb.offsetWidth,
-    );
-
-    thumb.style.left = `${newLeft}px`;
-
-    const slider = sliderRef.current;
-    const scrollWidth = slider.scrollWidth - slider.clientWidth;
-    slider.scrollLeft = (newLeft / (scrollbar.clientWidth - thumb.offsetWidth)) * scrollWidth;
-  };
-
-  const handleMouseUpThumb = () => {
-    isDraggingThumb = false;
-    document.body.style.userSelect = ''; // Re-enable text selection
-    thumbRef.current.style.cursor = 'grab';
-  };
-
-  // Update thumb position based on slider scroll
-  const updateThumbPosition = () => {
-    const slider = sliderRef.current;
-    const scrollbar = scrollbarRef.current;
-    const thumb = thumbRef.current;
-
-    const scrollLeft = slider.scrollLeft;
-    const scrollWidth = slider.scrollWidth - slider.clientWidth;
-    const thumbWidth = (slider.clientWidth / slider.scrollWidth) * scrollbar.clientWidth;
-
-    thumb.style.width = `${thumbWidth}px`;
-    thumb.style.left = `${(scrollLeft / scrollWidth) * (scrollbar.clientWidth - thumbWidth)}px`;
-  };
-
-  useEffect(() => {
-    const slider = sliderRef.current;
-    const thumb = thumbRef.current;
-
-    // Initialize thumb position
-    updateThumbPosition();
-
-    // Add event listeners for thumb dragging
-    thumb.addEventListener('mousedown', handleMouseDownThumb);
-    document.addEventListener('mousemove', handleMouseMoveThumb);
-    document.addEventListener('mouseup', handleMouseUpThumb);
-
-    // Add event listeners for slider dragging
-    slider.addEventListener('mousedown', handleMouseDownSlider);
-    slider.addEventListener('mousemove', handleMouseMoveSlider);
-    slider.addEventListener('mouseup', handleMouseUpSlider);
-    slider.addEventListener('mouseleave', handleMouseUpSlider);
-
-    thumb.addEventListener('touchstart', handleMouseDownThumb);
-    document.addEventListener('touchmove', handleMouseMoveThumb);
-    document.addEventListener('touchend', handleMouseUpThumb);
-
-    slider.addEventListener('scroll', updateThumbPosition);
-
-    return () => {
-      thumb.removeEventListener('mousedown', handleMouseDownThumb);
-      document.removeEventListener('mousemove', handleMouseMoveThumb);
-      document.removeEventListener('mouseup', handleMouseUpThumb);
-
-      thumb.removeEventListener('mousedown', handleMouseDownThumb);
-      document.removeEventListener('mousemove', handleMouseMoveThumb);
-      document.removeEventListener('mouseup', handleMouseUpThumb);
-
-      slider.removeEventListener('mousedown', handleMouseDownSlider);
-      slider.removeEventListener('mousemove', handleMouseMoveSlider);
-      slider.removeEventListener('mouseup', handleMouseUpSlider);
-      slider.removeEventListener('mouseleave', handleMouseUpSlider);
-
-      slider.removeEventListener('scroll', updateThumbPosition);
-    };
-  }, []);
-
   return (
     <section className='about'>
       <div className='container'>
@@ -176,41 +49,32 @@ export default function About() {
           </p>
         </div>
       </div>
-      <div className='container__wider'>
-        <div className='slider' ref={sliderRef}>
-          <div className='slider__container'>
-            <div className='slider__item'>
-              <Image src={slider1} alt='Щасливі діти' />
-            </div>
-            <div className='slider__item'>
-              <Image src={slider2} alt='Щасливі діти' />
-            </div>
-            <div className='slider__item'>
-              <Image src={slider3} alt='Щасливі діти' />
-            </div>
-            <div className='slider__item'>
-              <Image src={slider4} alt='Щасливі діти' />
-            </div>
-            <div className='slider__item'>
-              <Image src={slider5} alt='Щасливі діти' />
-            </div>
-            <div className='slider__item'>
-              <Image src={slider6} alt='Щасливі діти' />
-            </div>
-            <div className='slider__item'>
-              <Image src={slider7} alt='Щасливі діти' />
-            </div>
-            <div className='slider__item'>
-              <Image src={slider8} alt='Щасливі діти' />
-            </div>
-          </div>
+      <Slider darkerScrollbar>
+        <div className='slider__item'>
+          <Image src={slider1} alt='Щасливі діти' />
         </div>
-      </div>
-      <div className='container relative'>
-        <div className='custom-scrollbar darker-scrollbar' ref={scrollbarRef}>
-          <div className='custom-thumb' ref={thumbRef}></div>
+        <div className='slider__item'>
+          <Image src={slider2} alt='Щасливі діти' />
         </div>
-      </div>
+        <div className='slider__item'>
+          <Image src={slider3} alt='Щасливі діти' />
+        </div>
+        <div className='slider__item'>
+          <Image src={slider4} alt='Щасливі діти' />
+        </div>
+        <div className='slider__item'>
+          <Image src={slider5} alt='Щасливі діти' />
+        </div>
+        <div className='slider__item'>
+          <Image src={slider6} alt='Щасливі діти' />
+        </div>
+        <div className='slider__item'>
+          <Image src={slider7} alt='Щасливі діти' />
+        </div>
+        <div className='slider__item'>
+          <Image src={slider8} alt='Щасливі діти' />
+        </div>
+      </Slider>
       <div className='container'>
         <Image
           src={aboutDecor}

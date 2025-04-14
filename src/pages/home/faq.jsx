@@ -28,6 +28,7 @@ export default function Faq() {
       });
     };
   }, []);
+
   return (
     <section className='faq'>
       <div className='container'>

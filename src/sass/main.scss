@@ -623,6 +623,7 @@ header .accent-button {
 .application-select {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   font-weight: 500;
   font-size: 1rem;
@@ -634,6 +635,7 @@ header .accent-button {
   padding: 0.375rem 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  flex: 1;
   &.selected {
     cursor: default;
     color: $whiteColor;
@@ -1018,8 +1020,8 @@ header .accent-button {
   border-radius: 0.94rem;
   position: absolute;
   bottom: 0;
-  left: 0;
-  width: 100%;
+  left: 1rem;
+  width: calc(100% - 2rem);
   height: 1rem;
   overflow: hidden;
 }
@@ -1348,6 +1350,7 @@ header .accent-button {
   border-radius: 0.94rem;
   & h4 {
     flex: 1;
+    padding: 0 2.75rem 0 0;
   }
   & > img {
     border-radius: 1rem;
@@ -1393,6 +1396,12 @@ header .accent-button {
   }
 }
 
+@media (max-width: 480px) {
+  .social-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
 //? About Page
 
 .about-page {
@@ -1420,6 +1429,10 @@ header .accent-button {
   display: flex;
   flex-direction: column;
   gap: 2.75rem;
+  max-width: 23rem;
+  & iframe {
+    background-color: #fefefe;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1735,6 +1748,8 @@ header .accent-button {
 }
 
 .accent-bg {
+  position: relative;
+  z-index: 1;
   background: $accentColor;
   font-weight: 700;
   font-size: clamp(1rem, 0.9167rem + 0.3704vw, 1.25rem);
@@ -1925,6 +1940,284 @@ header .accent-button {
   }
 }
 
+//? Kindergarten Page
+
+.kindergarten {
+  & .hero-text__container {
+    max-width: 530px;
+  }
+  & .container img[alt='Декор'] {
+    &:nth-child(1) {
+      right: 40%;
+      bottom: 90%;
+    }
+    &:nth-child(2) {
+      top: 2%;
+      right: 10%;
+    }
+    &:nth-child(3) {
+      top: 28%;
+      right: 0%;
+    }
+    &:nth-child(4) {
+      right: 30%;
+      top: 25%;
+    }
+    &:nth-child(5) {
+      top: 45%;
+      right: 23%;
+    }
+    &:nth-child(6) {
+      top: 70%;
+      right: 1%;
+    }
+  }
+  & .faq h2 {
+    font-size: clamp(2.5rem, 2.2917rem + 0.9259vw, 3.125rem);
+  }
+}
+
+.kinder-circle {
+  display: block;
+  border-radius: 100%;
+  aspect-ratio: 1;
+  position: absolute;
+  animation: float 3s ease-in-out infinite alternate;
+  &.blue {
+    animation-delay: 0.5s;
+    background: $accentColor;
+    height: 1.5rem;
+    top: 0px;
+    left: 110px;
+  }
+  &.yellow {
+    animation-delay: 1s;
+    background: $accentYellowColor;
+    height: 2.5rem;
+    top: 20px;
+    right: -150px;
+  }
+  &.orange {
+    background: $accentOrangeColor;
+    height: 4.5rem;
+    bottom: -20px;
+    right: 10%;
+  }
+}
+
+.kinder-services {
+  position: relative;
+  & img[aria-hidden] {
+    animation: float 3s ease-in-out alternate infinite;
+    &:nth-child(1) {
+      right: 100px;
+      rotate: 180deg;
+    }
+    &:nth-child(2) {
+      animation-delay: 0.5s;
+      top: 85px;
+      right: 200px;
+      rotate: 180deg;
+    }
+    &:nth-child(3) {
+      top: 150px;
+      right: 110px;
+    }
+    &:nth-child(4) {
+      right: 255px;
+      top: 0;
+    }
+  }
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 3rem 0 9rem 0;
+    & li {
+      min-width: 240px;
+      flex: 1 0 20%;
+      padding: 2px;
+      background-color: $whiteColor;
+      border-radius: 1rem;
+      font-weight: 700;
+      font-size: 1.5rem;
+      line-height: 100%;
+      color: $mainColor;
+    }
+  }
+}
+
+.kinder-details {
+  background: $accentOrangeColor;
+  padding-block: 9rem;
+  &__list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 3rem 0 0 0;
+    & li {
+      padding: 1.5rem;
+      border-radius: 1rem;
+      background: #c8572c;
+      & p {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: $whiteColor;
+      }
+      & span {
+        font-weight: 400;
+        font-size: 1rem;
+        color: $whiteColor;
+      }
+    }
+  }
+}
+
+.kinder-benefits-list {
+  margin: 9rem 0;
+  & li {
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    &:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+    & h3 {
+      // word-break: break-all;
+      font-weight: 700;
+      font-size: clamp(2rem, 1.625rem + 1.6667vw, 3.125rem);
+      line-height: 100%;
+      color: $whiteColor;
+      & + p {
+        margin: 1rem 0 0 0;
+      }
+    }
+    & p {
+      font-weight: 500;
+      font-size: clamp(1.25rem, 1.1667rem + 0.3704vw, 1.5rem);
+      color: #fff;
+      opacity: 0.7;
+    }
+    & img {
+      flex: 0 1 55%;
+      min-width: 55%;
+      display: block;
+      border-radius: 1rem;
+    }
+  }
+}
+
+.kinder-schedule-list {
+  margin: 2.75rem 0 0 0;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  & li {
+    flex: 1 1 30%;
+    padding: 1.25rem 1rem;
+    border-radius: 1rem;
+    background: #c8572c;
+    & h3 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      color: $whiteColor;
+      line-height: 100%;
+      margin: 0 0 2rem 0;
+    }
+    & span {
+      display: block;
+      padding: 0.375rem 1rem;
+      background: $whiteColor;
+      border-radius: 3.125rem;
+
+      font-weight: 500;
+      font-size: 1rem;
+      color: #ef6936;
+      &:not(:last-child) {
+        margin: 0 0 1rem 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 880px) {
+}
+
+@media (max-width: 768px) {
+  .kindergarten .hero-text__container {
+    margin-inline: auto;
+  }
+  .kindergarten .container img[alt='Декор']:nth-child(1) {
+    display: block;
+    top: 20%;
+    right: 80%;
+  }
+  .kindergarten .container img[alt='Декор']:nth-child(2) {
+    top: 0;
+    right: 4%;
+  }
+  .kindergarten .container img[alt='Декор']:nth-child(3) {
+    top: 55%;
+    right: 7%;
+  }
+  .kindergarten .container img[alt='Декор']:nth-child(4) {
+    top: 70%;
+    right: 80%;
+  }
+  .kindergarten .container img[alt='Декор']:nth-child(5) {
+    top: -12%;
+    right: 40%;
+  }
+  .kindergarten .container img[alt='Декор']:nth-child(6) {
+    top: 96%;
+  }
+  .kinder-circle.yellow {
+    right: 20px;
+  }
+  .kinder-services img[aria-hidden]:nth-child(1) {
+    right: 35px;
+  }
+  .kinder-services img[aria-hidden]:nth-child(2) {
+    top: 175px;
+    right: unset;
+  }
+  .kinder-services img[aria-hidden]:nth-child(3) {
+    top: 200px;
+    right: 135px;
+  }
+  .kinder-services img[aria-hidden]:nth-child(4) {
+    right: 90%;
+  }
+  .kinder-benefits-list {
+    margin: 4rem 0;
+  }
+  .kinder-benefits-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .kinder-benefits-list li:nth-child(2) {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .kinder-details {
+    padding-block: 6rem;
+  }
+  .kinder-services__list {
+    margin: 3rem 0 6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .questions {
+    max-width: 100%;
+  }
+}
+
 //? Animations
 
 @keyframes float {
@@ -2000,5 +2293,55 @@ header .accent-button {
   }
   100% {
     transform: translate(calc(-100% - 1.25rem), -50%) scale(1);
+  }
+}
+
+.hoverable-item {
+  $--x-px: calc(var(--x) * 1px);
+  $--y-px: calc(var(--y) * 1px);
+  overflow: hidden;
+  position: relative;
+  &__inset {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem;
+    background: $whiteColor;
+    border-radius: inherit;
+
+    position: relative;
+    z-index: 3;
+  }
+  & .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &:hover:after {
+    opacity: 1;
+  }
+  &:before {
+    z-index: 1;
+  }
+  &:after {
+    opacity: 0;
+    z-index: 2;
+    transition: opacity 0.4s ease;
+  }
+  @media (pointer: fine) {
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      inset: 0px;
+      border-radius: inherit;
+      background: radial-gradient(300px circle at $--x-px $--y-px, $accentColor, transparent 50%);
+    }
   }
 }

@@ -76,12 +76,10 @@ export default function About() {
         </section>
         <aside className='about-aside'>
           <iframe
-            src='https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FPiznayki&tabs=timeline&width=320&height=844&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=false&appId'
-            width='320'
+            src='https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FPiznayki&tabs=timeline&width=367&height=844&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=false&appId'
+            width='367'
             height='844'
-            style={{ border: 'none', overflow: 'hidden' }}
-            scrolling='no'
-            frameBorder='0'
+            style={{ border: 'none', overflow: 'hidden', width: '100%' }}
             allowFullScreen={true}
             allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'></iframe>
           <Modal
@@ -90,7 +88,7 @@ export default function About() {
               <Image
                 src={license}
                 alt='Подяка за непохитну відданість справі'
-                className='cursor-pointer'
+                className='cursor-pointer max-w-full'
               />
             }>
             <Image

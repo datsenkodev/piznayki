@@ -29,7 +29,7 @@ export default function Footer() {
                 <Image src={facebook} alt='Фейсбук школи' />
                 <span>Facebook</span>
               </Link>
-              <Link href='https://www.instagram.com/' target='_blank'>
+              <Link href='https://www.instagram.com/piznayki/' target='_blank'>
                 <Image src={instagram} alt='Інстаграм школи' />
                 <span>Instagram</span>
               </Link>

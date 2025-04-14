@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
@@ -16,6 +16,9 @@ export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isHeaderOpen, setIsHeaderOpen] = useState(false);
 
+  const dropdownRef = useRef(null);
+  const headerRef = useRef(null);
+
   const pathname = usePathname();
 
   const toggleDropdown = () => {
@@ -25,8 +28,35 @@ export default function Header() {
   const toggleHeader = () => {
     setIsHeaderOpen(!isHeaderOpen);
   };
+
+  const closeHeader = () => {
+    setIsHeaderOpen(false);
+  };
+
+  useEffect(() => {
+    const handleCloseDropdown = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    const handleCloseHeader = (e) => {
+      if (headerRef.current && !headerRef.current.contains(e.target)) {
+        setIsHeaderOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleCloseDropdown);
+    document.addEventListener('click', handleCloseHeader);
+
+    return () => {
+      document.removeEventListener('click', handleCloseDropdown);
+      document.removeEventListener('click', handleCloseHeader);
+    };
+  }, []);
+
   return (
-    <header className='header'>
+    <header className='header' ref={headerRef}>
       <div className='container header-container relative'>
         <div className='logo flex-[0_0_135px]'>
           <Link href='/'>
@@ -37,18 +67,26 @@ export default function Header() {
           <nav className='nav'>
             <ul className='nav-list'>
               <li>
-                <Link href='/' className={`header-link ${pathname == '/' ? 'active' : ''}`}>
+                <Link
+                  href='/'
+                  className={`header-link ${pathname == '/' ? 'active' : ''}`}
+                  onClick={() => {
+                    closeHeader();
+                  }}>
                   <span>Головна</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href='/kindergarten'
-                  className={`header-link ${pathname == '/kindergarten' ? 'active' : ''}`}>
+                  className={`header-link ${pathname == '/kindergarten' ? 'active' : ''}`}
+                  onClick={() => {
+                    closeHeader();
+                  }}>
                   <span>Дитячий садок</span>
                 </Link>
               </li>
-              <li className='relative'>
+              <li className='relative' ref={dropdownRef}>
                 <p
                   className={`header-dropdown ${
                     isDropdownOpen ? 'dropdown-active' : ''
@@ -67,12 +105,20 @@ export default function Header() {
                 <div className='dropdown-list'>
                   <Link
                     href='/middle-school'
-                    className={`header-link ${pathname == '/middle-school' ? 'active' : ''}`}>
+                    className={`header-link ${pathname == '/middle-school' ? 'active' : ''}`}
+                    onClick={() => {
+                      closeHeader();
+                      setIsDropdownOpen(false);
+                    }}>
                     <span>Середня школа</span>
                   </Link>
                   <Link
                     href='/primary-school'
-                    className={`header-link ${pathname == '/primary-school' ? 'active' : ''}`}>
+                    className={`header-link ${pathname == '/primary-school' ? 'active' : ''}`}
+                    onClick={() => {
+                      closeHeader();
+                      setIsDropdownOpen(false);
+                    }}>
                     <span>Початкова школа</span>
                   </Link>
                 </div>
@@ -80,7 +126,10 @@ export default function Header() {
               <li>
                 <Link
                   href='/about-us'
-                  className={`header-link ${pathname == '/about-us' ? 'active' : ''}`}>
+                  className={`header-link ${pathname == '/about-us' ? 'active' : ''}`}
+                  onClick={() => {
+                    closeHeader();
+                  }}>
                   <span>Про нас</span>
                 </Link>
               </li>
@@ -92,7 +141,10 @@ export default function Header() {
               <li>
                 <Link
                   href='/contacts'
-                  className={`header-link ${pathname == '/contacts' ? 'active' : ''}`}>
+                  className={`header-link ${pathname == '/contacts' ? 'active' : ''}`}
+                  onClick={() => {
+                    closeHeader();
+                  }}>
                   <span>Контакти</span>
                 </Link>
               </li>

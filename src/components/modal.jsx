@@ -49,7 +49,7 @@ export default function Modal({ trigger, children, dataClass }) {
 
   return (
     <>
-      <div onClick={openModal} style={{ cursor: 'pointer' }}>
+      <div onClick={openModal} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
         {trigger}
       </div>
       <ModalContent dataClass={dataClass} isOpen={isModalOpen} onClose={closeModal}>
