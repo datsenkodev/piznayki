@@ -8,15 +8,21 @@ function ModalContent({ isOpen, onClose, children, dataClass }) {
   useEffect(() => {
     if (isOpen) {
       modalRef.current?.showModal();
+      console.log('should add');
+      document.body.classList.add('no-scroll');
     } else {
       modalRef.current?.close();
+      console.log('should remove');
+      document.body.classList.remove('no-scroll');
     }
   }, [isOpen]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (modalRef.current && e.target === modalRef.current) {
+        console.log('should remove');
         onClose();
+        document.body.classList.remove('no-scroll');
       }
     };
 
@@ -27,11 +33,7 @@ function ModalContent({ isOpen, onClose, children, dataClass }) {
   }, [onClose]);
 
   return (
-    <dialog
-      ref={modalRef}
-      className={`modal ${dataClass ? dataClass : ''}`}
-      onCancel={onClose} // Handle the Escape key to close the modal
-    >
+    <dialog ref={modalRef} className={`modal ${dataClass ? dataClass : ''}`} onCancel={onClose}>
       <button className='close-btn' onClick={onClose}>
         <span></span>
         <span></span>

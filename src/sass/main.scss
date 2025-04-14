@@ -178,7 +178,7 @@ header .accent-button {
 }
 
 .toast {
-  position: absolute;
+  position: fixed;
   top: 1rem;
   right: 50%;
   padding: 0.75rem 1.25rem;
@@ -569,7 +569,7 @@ header .accent-button {
   width: max-content;
   padding: 2rem;
   opacity: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   text-align: left;
 
   transition-property: display, opacity;
