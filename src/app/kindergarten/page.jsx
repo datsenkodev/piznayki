@@ -150,7 +150,7 @@ export default function Kindergarten() {
               <h2 className='leading-[120%] text-center md:text-left'>
                 Садок відповідає <span>високим вимогам суспільства</span>
               </h2>
-              <p className='m-6 sm:mt-10 sm:mb-7 text-2xl'>
+              <p className='my-6 sm:mt-10 sm:mb-7 text-2xl'>
                 Та стандартам Міністерства освіти та науки України, про що свідчить{' '}
                 <Link
                   href={'https://koda.gov.ua/normdoc/pro-vidachu-licenzii-na-provadzhennya-os-32/'}
