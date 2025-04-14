@@ -39,7 +39,7 @@ export default function Kids() {
             <h3>
               Вже побували у нас,<span> залишайте заявку і Ви!</span>
             </h3>
-            <div className='flex flex-col md:flex-row gap-[0.625rem] md:gap-4 mt-12 relative z-1'>
+            <div className='flex flex-col md:flex-row items-center md:items-stretch gap-[0.625rem] md:gap-4 mt-12 relative z-1'>
               <Modal trigger={<button className='accent-button'>Анкета для вступу</button>}>
                 <Application />
               </Modal>
