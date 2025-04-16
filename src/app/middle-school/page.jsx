@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 import Modal from '@components/modal';
 import Application from '@components/applicationModal';
+import Faq from '@home/faq';
 import Kids from '@components/kids';
 
 import twemoji from 'twemoji';
@@ -135,6 +136,7 @@ export default function MiddleSchool() {
           </div>
         </div>
       </section>
+      <Faq />
       <Kids />
     </main>
   );
