@@ -106,8 +106,7 @@ export default function Kindergarten() {
               <span>Вул. Кургузова 1А, Корпус 3</span>
             </Link>
             <p className='page-subtitle'>
-              Відкритий у 2019р в офісному приміщенні нового житлового комплексу ЖК «Ярославичі-1»
-              міста Вишгорода Київської області.
+              Відкритий у 2019р в новому житловому комплексі ЖК «Ярославичі-1» міста Вишгород.
             </p>
             <div className='flex flex-col md:flex-row items-center md:items-stretch gap-4'>
               <Modal trigger={<button className='accent-button'>Анкета для вступу</button>}>
@@ -313,7 +312,7 @@ export default function Kindergarten() {
       <section className='faq'>
         <div className='container'>
           <h2 className='max-w-[500px] lowercase leading-[120%] text-center md:text-left'>
-            <span className='block uppercase break-all 880:break-keep'>Найпоширеніші</span>{' '}
+            <span className='block uppercase break-all 880:break-keep'>Найпоширеніші</span>
             запитання про садочок?
           </h2>
           <div className='questions'>
@@ -380,17 +379,17 @@ export default function Kindergarten() {
               <div className='panel'>
                 <p className='acc-text'>
                   В садочку навчаються діти у трьох вікових групах. При переході до старшої групи
-                  діти переміщаються у Початкову , де увесь навчальний рік навчаються у нульовому
-                  класі. Цей клас ми називаємо PresSchool. <br />
+                  діти переміщаються у Початкову, де увесь навчальний рік навчаються у нульовому
+                  класі. Цей клас ми називаємо PreSchool. <br />
                   Тут дітки проходять усю програму базового компоненту дошкільної освіти, щодня
-                  займаються з вчителем з підготовки до школи , щодня мають заняття з вивчення
+                  займаються з вчителем з підготовки до школи, щодня мають заняття з вивчення
                   іноземної мови. Також мають змогу відвідувати спортивні секції та творчі студії
                 </p>
               </div>
             </button>
 
             <button className='accordeon'>
-              <h3>Як організоване харчування у дошкільному закладі?</h3>{' '}
+              <h3>Як організоване харчування у дошкільному закладі?</h3>
               <div className='panel'>
                 <p className='acc-text'>
                   В садочку повноцінне 4 -х разове харчування: сніданок, обід, полуденок та вечеря.

@@ -38,7 +38,7 @@ export default function MiddleSchool() {
               <Image src={pin} alt='точка на мапі' />
               <span>Вул. Шкільна 73а</span>
             </Link>
-            <p className='page-subtitle'>Здобуття освіти разом з нами – мрія кожного!</p>
+            <p className='page-subtitle'>Здобуття освіти разом з нами - мрія кожного!</p>
             <div className='flex flex-col md:flex-row items-center md:items-stretch gap-4'>
               <Modal trigger={<button className='accent-button'>Анкета для вступу</button>}>
                 <Application />
@@ -129,7 +129,7 @@ export default function MiddleSchool() {
               </p>
               <p className='row-item'>
                 <Twemoji emoji='🔎' />
-                <span>Регулярний контроль знань поточний та семестровий контроль успішності</span>
+                <span>Регулярний контроль знань, поточний та семестровий контроль успішності</span>
               </p>
             </div>
           </div>

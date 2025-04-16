@@ -8,12 +8,10 @@ function ModalContent({ isOpen, onClose, children, dataClass }) {
   useEffect(() => {
     if (isOpen) {
       modalRef.current?.showModal();
-      console.log('should add');
-      document.body.classList.add('no-scroll');
+      document.body.classList.add('no-scroll-modal');
     } else {
       modalRef.current?.close();
-      console.log('should remove');
-      document.body.classList.remove('no-scroll');
+      document.body.classList.remove('no-scroll-modal');
     }
   }, [isOpen]);
 
@@ -22,7 +20,7 @@ function ModalContent({ isOpen, onClose, children, dataClass }) {
       if (modalRef.current && e.target === modalRef.current) {
         console.log('should remove');
         onClose();
-        document.body.classList.remove('no-scroll');
+        document.body.classList.remove('no-scroll-modal');
       }
     };
 

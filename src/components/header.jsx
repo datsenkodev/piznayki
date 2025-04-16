@@ -27,12 +27,12 @@ export default function Header() {
 
   const toggleHeader = () => {
     setIsHeaderOpen(!isHeaderOpen);
-    document.body.classList.toggle('no-scroll', !isHeaderOpen);
+    document.body.classList.toggle('no-scroll-nav', !isHeaderOpen);
   };
 
   const closeHeader = () => {
     setIsHeaderOpen(false);
-    document.body.classList.remove('no-scroll');
+    document.body.classList.remove('no-scroll-nav');
   };
 
   useEffect(() => {

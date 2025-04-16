@@ -95,7 +95,8 @@ footer {
   }
 }
 
-.no-scroll {
+.no-scroll-modal,
+.no-scroll-nav {
   overflow: hidden;
   max-height: 100svh;
 }
@@ -1006,6 +1007,7 @@ header .accent-button {
 }
 .container__right-sided {
   width: min(100%, 1560px - 2.5rem);
+  padding-inline: 1rem;
   margin-left: auto;
   & .slider__container {
     width: fit-content;
@@ -1026,8 +1028,8 @@ header .accent-button {
   border-radius: 0.94rem;
   position: absolute;
   bottom: 0;
-  left: 1rem;
-  width: calc(100% - 2rem);
+  left: 0;
+  width: 100%;
   height: 1rem;
   overflow: hidden;
 }
@@ -1042,7 +1044,7 @@ header .accent-button {
   cursor: pointer;
 }
 
-.darker-scrollbar {
+.custom-scrollbar.darker-scrollbar {
   background-color: $whiteLightColor;
   & .custom-thumb {
     background-color: #1b2050;
@@ -1068,6 +1070,33 @@ header .accent-button {
     pointer-events: none;
     min-height: 100%;
     user-select: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .slider {
+    &.darker-scrollbar {
+      &::-webkit-scrollbar {
+        background: #e0eaf5;
+        &-thumb {
+          background: #1b2050;
+        }
+      }
+    }
+    &::-webkit-scrollbar {
+      height: 1rem;
+      background-color: $whiteColor;
+      border-radius: 1rem;
+      overflow: hidden;
+      &-thumb {
+        background-color: #5b64c5;
+        height: 100%;
+        border-radius: 1rem;
+      }
+    }
+  }
+  .custom-scrollbar {
+    display: none;
   }
 }
 
@@ -1233,7 +1262,7 @@ header .accent-button {
 @media (max-width: 1024px) {
   .feedback-container {
     display: flex;
-    overflow-x: scroll;
+    overflow-x: auto;
     padding: 0 0 2rem 0;
     &::-webkit-scrollbar {
       background-color: $whiteLightColor;

@@ -99,63 +99,79 @@ export default function Slider({ children, darkerScrollbar }) {
     const slider = sliderRef.current;
     const thumb = thumbRef.current;
 
-    updateThumbPosition();
+    let isLargeScreen = window.matchMedia('(min-width: 1024px)').matches;
 
-    // Add event listeners for thumb dragging
-    thumb.addEventListener('mousedown', handleMouseDownThumb);
-    document.addEventListener('mousemove', handleMouseMoveThumb, { passive: false });
-    document.addEventListener('mouseup', handleMouseUp);
-
-    // Add event listeners for slider dragging
-    slider.addEventListener('mousedown', handleMouseDownSlider);
-    document.addEventListener('mousemove', handleMouseMoveSlider, { passive: false });
-    document.addEventListener('mouseup', handleMouseUp);
-
-    // Add touch events for both thumb and slider
-    thumb.addEventListener('touchstart', handleMouseDownThumb);
-    document.addEventListener('touchmove', handleMouseMoveThumb, { passive: false });
-    document.addEventListener('touchend', handleMouseUp);
-
-    slider.addEventListener('touchstart', handleMouseDownSlider);
-    document.addEventListener('touchmove', handleMouseMoveSlider, { passive: false });
-    document.addEventListener('touchend', handleMouseUp);
-
-    // Sync thumb position with slider scroll
-    slider.addEventListener('scroll', updateThumbPosition);
-
-    // Recalculate thumb width on window resize
-    const handleResize = () => {
+    if (isLargeScreen) {
       updateThumbPosition();
-    };
-    window.addEventListener('resize', handleResize);
 
-    return () => {
-      thumb.removeEventListener('mousedown', handleMouseDownThumb);
-      document.removeEventListener('mousemove', handleMouseMoveThumb);
-      document.removeEventListener('mouseup', handleMouseUp);
+      // Add event listeners for thumb dragging
+      thumb.addEventListener('mousedown', handleMouseDownThumb);
+      document.addEventListener('mousemove', handleMouseMoveThumb, { passive: false });
+      document.addEventListener('mouseup', handleMouseUp);
 
-      slider.removeEventListener('mousedown', handleMouseDownSlider);
-      document.removeEventListener('mousemove', handleMouseMoveSlider);
-      document.removeEventListener('mouseup', handleMouseUp);
+      // Add event listeners for slider dragging
+      slider.addEventListener('mousedown', handleMouseDownSlider);
+      document.addEventListener('mousemove', handleMouseMoveSlider, { passive: false });
+      document.addEventListener('mouseup', handleMouseUp);
 
-      thumb.removeEventListener('touchstart', handleMouseDownThumb);
-      document.removeEventListener('touchmove', handleMouseMoveThumb);
-      document.removeEventListener('touchend', handleMouseUp);
+      // Add touch events for both thumb and slider
+      thumb.addEventListener('touchstart', handleMouseDownThumb);
+      document.addEventListener('touchmove', handleMouseMoveThumb, { passive: false });
+      document.addEventListener('touchend', handleMouseUp);
 
-      slider.removeEventListener('touchstart', handleMouseDownSlider);
-      document.removeEventListener('touchmove', handleMouseMoveSlider);
-      document.removeEventListener('touchend', handleMouseUp);
+      slider.addEventListener('touchstart', handleMouseDownSlider);
+      document.addEventListener('touchmove', handleMouseMoveSlider, { passive: false });
+      document.addEventListener('touchend', handleMouseUp);
 
-      slider.removeEventListener('scroll', updateThumbPosition);
+      // Sync thumb position with slider scroll
+      slider.addEventListener('scroll', updateThumbPosition);
 
-      window.removeEventListener('resize', handleResize);
-    };
+      // Recalculate thumb width on window resize
+      const handleResize = () => {
+        updateThumbPosition();
+      };
+
+      window.addEventListener('resize', handleResize);
+      console.log(thumbRef);
+
+      return () => {
+        thumb.removeEventListener('mousedown', handleMouseDownThumb);
+        document.removeEventListener('mousemove', handleMouseMoveThumb);
+        document.removeEventListener('mouseup', handleMouseUp);
+
+        slider.removeEventListener('mousedown', handleMouseDownSlider);
+        document.removeEventListener('mousemove', handleMouseMoveSlider);
+        document.removeEventListener('mouseup', handleMouseUp);
+
+        thumb.removeEventListener('touchstart', handleMouseDownThumb);
+        document.removeEventListener('touchmove', handleMouseMoveThumb);
+        document.removeEventListener('touchend', handleMouseUp);
+
+        slider.removeEventListener('touchstart', handleMouseDownSlider);
+        document.removeEventListener('touchmove', handleMouseMoveSlider);
+        document.removeEventListener('touchend', handleMouseUp);
+
+        slider.removeEventListener('scroll', updateThumbPosition);
+
+        window.removeEventListener('resize', handleResize);
+      };
+    } else {
+      console.log(thumbRef);
+
+      if (thumb) {
+        thumb.style.width = '';
+        thumb.style.left = '';
+      }
+      if (slider) {
+        slider.style.scrollBehavior = '';
+      }
+    }
   }, []);
 
   return (
     <>
       <div className='container__right-sided'>
-        <div className='slider' ref={sliderRef}>
+        <div className={`slider ${darkerScrollbar ? 'darker-scrollbar' : ''}`} ref={sliderRef}>
           <div className='slider__container'>{children}</div>
         </div>
       </div>
