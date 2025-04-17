@@ -36,6 +36,9 @@ $whiteLightColor: #e0eaf5;
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
 body {
@@ -50,6 +53,7 @@ body {
 
 main {
   flex: 1;
+  margin: 93px 0 0 0;
 }
 
 h1,
@@ -93,12 +97,6 @@ footer {
     padding-inline: 1.25rem;
     position: relative;
   }
-}
-
-.no-scroll-modal,
-.no-scroll-nav {
-  overflow: hidden;
-  max-height: 100svh;
 }
 
 .accent-button {
@@ -222,6 +220,9 @@ header .accent-button {
 
 .header {
   background: $whiteColor;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
 }
 
 .header-container {
@@ -606,13 +607,15 @@ header .accent-button {
   display: block;
   top: 1.5rem;
   right: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
   padding: 0.5rem;
   cursor: pointer;
 
   & span {
     position: absolute;
-    top: 50%;
-    left: calc(50% - 8px);
+    top: calc(50% - 3px);
+    left: calc(50% - 12px);
     border-radius: 2px;
     width: 1.5rem;
     height: 4px;
@@ -1030,6 +1033,7 @@ header .accent-button {
   bottom: 0;
   left: 0;
   width: 100%;
+  margin: 0 1.5rem;
   height: 1rem;
   overflow: hidden;
 }
@@ -1385,6 +1389,20 @@ header .accent-button {
   gap: 1rem;
   padding: 1.5rem 0.75rem 0.75rem 0.75rem;
   border-radius: 0.94rem;
+
+  background-image: url('/images/advices/advice-bg.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-blend-mode: soft-light;
+  // background-blend-mode: luminosity;
+  // background-blend-mode: color-burn; anchor
+  &:nth-child(2n) {
+    background-position: left;
+  }
+  &:nth-child(3n) {
+    background-position: right;
+  }
   & h4 {
     flex: 1;
     padding: 0 2.75rem 0 0;

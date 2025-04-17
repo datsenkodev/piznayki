@@ -36,7 +36,7 @@ export default function Advices() {
               className='absolute bottom-0 right-0'
             />
           </h4>
-          <Image src={advice1} alt='Щасливі діти' width={293} />
+          <Image src={advice1} alt='Щасливі діти' width={293} quality={100} />
         </Link>
         <Link
           className='advice-item bg-[#FFB400]'

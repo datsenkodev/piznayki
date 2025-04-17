@@ -1,12 +1,14 @@
 'use client';
 
+import { motion as m } from 'motion/react';
+
 import { memo } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
 import Slider from '@components/Slider';
-import Modal from '@components/modal';
+import { Modal } from '@components/modal';
 import Application from '@components/applicationModal';
 import Faq from '@home/faq';
 import Kids from '@components/kids';
@@ -19,7 +21,7 @@ import slider1 from 'public/images/primary/primary1.jpg';
 import slider2 from 'public/images/primary/primary2.jpg';
 import slider3 from 'public/images/primary/primary3.jpg';
 import slider4 from 'public/images/primary/primary4.jpg';
-import slider5 from 'public/images/primary/primary5.jpg';
+import slider5 from 'public/images/primary/primary6.jpg';
 
 import heroBig from 'public/images/primary/hero-big.png';
 import hero1 from 'public/images/primary/hero1.png';
@@ -28,7 +30,11 @@ import hero3 from 'public/images/primary/hero3.png';
 
 export default function PrimarySchool() {
   return (
-    <main className='primary-school'>
+    <m.main
+      className='primary-school'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}>
       <section className='hero-page'>
         <div className='container'>
           <Image src={heroBig} alt='Декор' aria-hidden className='absolute' quality={100} />
@@ -159,7 +165,7 @@ export default function PrimarySchool() {
       </section>
       <Faq />
       <Kids />
-    </main>
+    </m.main>
   );
 }
 

@@ -1,12 +1,14 @@
 'use client';
 
+import { motion as m } from 'motion/react';
+
 import { useEffect } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
 import Slider from '@components/Slider';
-import Modal from '@components/modal';
+import { Modal } from '@components/modal';
 import Application from '@components/applicationModal';
 import Advices from '@home/advices';
 import Kids from '@components/kids';
@@ -87,7 +89,11 @@ export default function Kindergarten() {
   }, []);
 
   return (
-    <main className='kindergarten'>
+    <m.main
+      className='kindergarten'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}>
       <section className='hero-page'>
         <div className='container'>
           <Image src={hero1} alt='Декор' aria-hidden className='float' quality={100} />
@@ -378,9 +384,8 @@ export default function Kindergarten() {
               <h3>Скільки вікових груп у садку?</h3>
               <div className='panel'>
                 <p className='acc-text'>
-                  В садочку навчаються діти у трьох вікових групах. При переході до старшої групи
-                  діти переміщаються у Початкову, де увесь навчальний рік навчаються у нульовому
-                  класі. Цей клас ми називаємо PreSchool. <br />
+                  В садочку навчаються діти у трьох вікових групах. З пʼяти років дітей переводять з
+                  садочку у нульовий клас початкової школи, який ми називаємо Preschool. <br />
                   Тут дітки проходять усю програму базового компоненту дошкільної освіти, щодня
                   займаються з вчителем з підготовки до школи, щодня мають заняття з вивчення
                   іноземної мови. Також мають змогу відвідувати спортивні секції та творчі студії
@@ -421,6 +426,6 @@ export default function Kindergarten() {
       </section>
       <Advices />
       <Kids />
-    </main>
+    </m.main>
   );
 }

@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { Modal } from './modal';
+import Application from './applicationModal';
+
 import kidsFullScreen from 'public/images/kids.jpg';
 import kids from 'public/images/hero-kids.png';
 import triangle from 'public/images/icons/triangle.svg';
@@ -8,8 +11,6 @@ import puzzleYellow from 'public/images/icons/puzzle-yellow.svg';
 import puzzleOrange from 'public/images/icons/puzzle-orange.svg';
 import puzzlePiece from 'public/images/icons/puzzle-piece.svg';
 import circle from 'public/images/icons/circle-yellow.svg';
-import Modal from './modal';
-import Application from './applicationModal';
 
 export default function Kids() {
   return (

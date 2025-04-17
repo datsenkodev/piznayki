@@ -1,5 +1,7 @@
 'use client';
 
+import { motion as m } from 'motion/react';
+
 import { useState } from 'react';
 
 import Image from 'next/image';
@@ -20,7 +22,11 @@ export default function Contacts() {
   };
 
   return (
-    <main className='contacts-page'>
+    <m.main
+      className='contacts-page'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}>
       <Map markerKey={selectedMarker} />
       <div className='container pointer-events-none'>
         <ul className='contacts-list'>
@@ -151,6 +157,6 @@ export default function Contacts() {
         </div>
       </section>
       <Kids />
-    </main>
+    </m.main>
   );
 }

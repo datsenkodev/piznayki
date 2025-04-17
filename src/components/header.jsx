@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 import logo from 'public/images/logo.png';
 
-import Modal from './modal';
+import { Modal } from './modal';
 import Application from './applicationModal';
 import Vacancy from './vacancyModal';
 
@@ -27,12 +27,10 @@ export default function Header() {
 
   const toggleHeader = () => {
     setIsHeaderOpen(!isHeaderOpen);
-    document.body.classList.toggle('no-scroll-nav', !isHeaderOpen);
   };
 
   const closeHeader = () => {
     setIsHeaderOpen(false);
-    document.body.classList.remove('no-scroll-nav');
   };
 
   useEffect(() => {
@@ -76,6 +74,16 @@ export default function Header() {
                     closeHeader();
                   }}>
                   <span>Головна</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href='/about-us'
+                  className={`header-link ${pathname == '/about-us' ? 'active' : ''}`}
+                  onClick={() => {
+                    closeHeader();
+                  }}>
+                  <span>Про нас</span>
                 </Link>
               </li>
               <li>
@@ -133,16 +141,6 @@ export default function Header() {
                     closeHeader();
                   }}>
                   <span>Репетиторський центр</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href='/about-us'
-                  className={`header-link ${pathname == '/about-us' ? 'active' : ''}`}
-                  onClick={() => {
-                    closeHeader();
-                  }}>
-                  <span>Про нас</span>
                 </Link>
               </li>
               <li>

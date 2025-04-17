@@ -1,8 +1,12 @@
+'use client';
+
+import { motion as m } from 'motion/react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
 import Slider from '@components/Slider';
-import Modal from '@components/modal';
+import { Modal } from '@components/modal';
 import Application from '@components/applicationModal';
 import Kids from '@components/kids';
 
@@ -12,7 +16,11 @@ import heroBig from 'public/images/tutor/hero-big.png';
 
 export default function TutorCenter() {
   return (
-    <main className='tutor'>
+    <m.main
+      className='tutor'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}>
       <section className='hero-page'>
         <div className='container'>
           <Image src={heroBig} alt='Декор' aria-hidden className='absolute' quality={100} />
@@ -198,6 +206,6 @@ export default function TutorCenter() {
         </Slider>
       </section>
       <Kids />
-    </main>
+    </m.main>
   );
 }

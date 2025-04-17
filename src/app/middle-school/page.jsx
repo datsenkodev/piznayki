@@ -1,11 +1,14 @@
 'use client';
 
+import { motion as m } from 'motion/react';
+
 import { memo } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Modal from '@components/modal';
+import Slider from '@components/Slider';
+import { Modal } from '@components/modal';
 import Application from '@components/applicationModal';
 import Faq from '@home/faq';
 import Kids from '@components/kids';
@@ -20,9 +23,20 @@ import hero2 from 'public/images/middle/hero2.png';
 import hero3 from 'public/images/middle/hero3.png';
 import hero4 from 'public/images/middle/hero4.png';
 
+import slider1 from 'public/images/middle/middle1.jpg';
+import slider2 from 'public/images/middle/middle2.jpg';
+import slider3 from 'public/images/middle/middle3.jpg';
+import slider4 from 'public/images/middle/middle4.jpg';
+import slider5 from 'public/images/middle/middle5.jpg';
+import slider6 from 'public/images/middle/middle6.jpg';
+
 export default function MiddleSchool() {
   return (
-    <main className='middle-school'>
+    <m.main
+      className='middle-school'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}>
       <section className='hero-page'>
         <div className='container'>
           <Image src={heroBig} alt='Декор' aria-hidden className='absolute' quality={100} />
@@ -50,6 +64,26 @@ export default function MiddleSchool() {
             </div>
           </div>
         </div>
+        <Slider>
+          <div className='slider__item'>
+            <Image src={slider1} alt='Щасливі діти' />
+          </div>
+          <div className='slider__item'>
+            <Image src={slider2} alt='Щасливі діти' />
+          </div>
+          <div className='slider__item'>
+            <Image src={slider3} alt='Щасливі діти' />
+          </div>
+          <div className='slider__item'>
+            <Image src={slider4} alt='Щасливі діти' />
+          </div>
+          <div className='slider__item'>
+            <Image src={slider5} alt='Щасливі діти' />
+          </div>
+          <div className='slider__item'>
+            <Image src={slider6} alt='Щасливі діти' />
+          </div>
+        </Slider>
       </section>
       <section className='page-content' id='page-content'>
         <div className='container'>
@@ -138,7 +172,7 @@ export default function MiddleSchool() {
       </section>
       <Faq />
       <Kids />
-    </main>
+    </m.main>
   );
 }
 

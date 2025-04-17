@@ -7,7 +7,7 @@ import instagram from 'public/images/icons/instagram.svg';
 import phone from 'public/images/icons/phone.svg';
 import mail from 'public/images/icons/mail.svg';
 import Vacancy from './vacancyModal';
-import Modal from './modal';
+import { Modal } from './modal';
 
 export default function Footer() {
   return (

@@ -7,20 +7,31 @@ function ModalContent({ isOpen, onClose, children, dataClass }) {
 
   useEffect(() => {
     if (isOpen) {
+      const body = document.body;
+      const scrollY = window.scrollY;
+      body.style.top = `-${scrollY}px`;
+      body.style.position = 'fixed';
+
+      document.documentElement.style.scrollBehavior = 'auto';
+
       modalRef.current?.showModal();
-      document.body.classList.add('no-scroll-modal');
     } else {
+      const body = document.body;
+      const scrollY = Math.abs(parseInt(document.body.style.top || '0', 10));
+      body.style.position = '';
+      body.style.top = '';
+      window.scrollTo(0, scrollY);
+
+      document.documentElement.style.scrollBehavior = 'smooth';
+
       modalRef.current?.close();
-      document.body.classList.remove('no-scroll-modal');
     }
   }, [isOpen]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (modalRef.current && e.target === modalRef.current) {
-        console.log('should remove');
         onClose();
-        document.body.classList.remove('no-scroll-modal');
       }
     };
 
@@ -41,7 +52,7 @@ function ModalContent({ isOpen, onClose, children, dataClass }) {
   );
 }
 
-export default function Modal({ trigger, children, dataClass }) {
+export function Modal({ trigger, children, dataClass }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);

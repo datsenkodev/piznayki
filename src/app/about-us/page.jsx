@@ -1,14 +1,22 @@
+'use client';
+
+import { motion as m } from 'motion/react';
+
 import Image from 'next/image';
 
-import Kids from '@/components/kids';
+import { Modal } from '@components/modal';
+import Kids from '@components/kids';
 
 import license from 'public/images/about-license.jpg';
 import image from 'public/images/about-image.jpg';
-import Modal from '@/components/modal';
 
 export default function About() {
   return (
-    <main className='about-page'>
+    <m.main
+      className='about-page'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}>
       <div className='container'>
         <section className='about-content'>
           <div className='rounded-2xl overflow-hidden'>
@@ -101,6 +109,6 @@ export default function About() {
         </aside>
       </div>
       <Kids />
-    </main>
+    </m.main>
   );
 }
