@@ -10,7 +10,7 @@ import Link from 'next/link';
 import Slider from '@components/Slider';
 import { Modal } from '@components/modal';
 import Application from '@components/applicationModal';
-import Faq from '@home/faq';
+import Faq from '@pages/school/faq';
 import Kids from '@components/kids';
 
 import twemoji from 'twemoji';
@@ -102,7 +102,7 @@ export default function MiddleSchool() {
               </p>
               <p className='row-item'>
                 <Twemoji emoji='🕗' />
-                <span>Графік : 08:00 до 18:30</span>
+                <span>Графік : 08:00 до 18:00</span>
               </p>
               <p className='row-item'>
                 <Twemoji emoji='📖' />
@@ -117,7 +117,7 @@ export default function MiddleSchool() {
           <div className='invite-container'>
             <p className='row-item accent-bg'>
               <Twemoji emoji='👧' />
-              <span>До абонементу включено:</span>
+              <span>Організація навчально-виховної діяльності:</span>
             </p>
           </div>
           <div className='flex gap-4 mt-4 flex-col md:flex-row'>

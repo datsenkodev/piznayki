@@ -17,7 +17,7 @@ export default function Advices() {
   return (
     <section className='advices'>
       <div className='container'>
-        <h2 className='max-w-[490px] lowercase leading-[120%] text-center md:text-left'>
+        <h2 className='max-w-full md:max-w-[490px] lowercase leading-[120%] text-center md:text-left'>
           <span className='block uppercase'>Поради</span>для батькiв
         </h2>
       </div>

@@ -5,6 +5,7 @@
       "@/*": ["src/*"],
       "@sass/*": ["src/sass/*"],
       "@components/*": ["./src/components/*"],
+      "@pages/*": ["./src/pages/*"],
       "@home/*": ["./src/pages/home/*"],
       "@contacts/*": ["./src/pages/contacts/*"]
     },

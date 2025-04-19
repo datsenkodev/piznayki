@@ -5,7 +5,7 @@ import { motion as m } from 'motion/react';
 import Hero from '@home/hero';
 import Message from '@home/message';
 import About from '@home/about';
-import Faq from '@home/faq';
+import Principles from '@home/principles';
 import Advices from '@home/advices';
 import Kids from '@components/kids';
 
@@ -15,7 +15,7 @@ export default function Home() {
       <Hero />
       <Message />
       <About />
-      <Faq />
+      <Principles />
       <Advices />
       <Kids />
     </m.main>

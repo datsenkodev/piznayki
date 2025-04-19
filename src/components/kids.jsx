@@ -35,7 +35,7 @@ export default function Kids() {
             <Image aria-hidden src={circle} alt='Жовте коло' className='float' />
             <Image aria-hidden src={circle} alt='Жовте коло' className='float' />
 
-            <Image src={kids} alt='Дітки' />
+            <Image src={kids} alt='Дітки' quality={100} />
             <h2 className='big-heading'>1000+ діток</h2>
             <h3>
               Вже побували у нас,<span> залишайте заявку і Ви!</span>

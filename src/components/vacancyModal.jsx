@@ -84,7 +84,7 @@ export default function Vacancy() {
         <h3 className='border-b border-gray-300 mb-4 sm:mb-8 pb-4 sm:pb-8 text-[clamp(1.5rem,_1.3333rem_+_0.7407vw,_2rem)]'>
           <span>Доступні вакансії</span>
         </h3>
-        <p className='mb-2'>Що вас цікавить?</p>
+        <p className='mb-2'>Яка вакансія вас цікавить?</p>
         <ul className='flex flex-wrap justify-center gap-1 p-1 mb-1 bg-[#eee] rounded-md text-center'>
           {['Вчитель початкових класів', 'Вчитель середньої школи', 'Вихователь '].map((item) => (
             <li

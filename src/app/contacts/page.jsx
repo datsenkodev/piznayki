@@ -77,12 +77,10 @@ export default function Contacts() {
             <label className='custom-radio' tabIndex={0} onClick={() => handleMarkerChange('4')}>
               <input type='radio' id='fourth_location' name='drone' value='fourth_location' />
               <span className='radio'></span>
-              <span className='text-[1rem] xs:text-xl font-bold'>
-                Репетиторський центр для 1-11 класів «Piznayki»
-              </span>
+              <span className='text-[1rem] xs:text-xl font-bold'>Група подовженого дня</span>
               <span className='flex gap-1 text-xs md:text-[1rem] text-[#646464]'>
                 <Image src={pin} alt='Точка геолокації' />
-                Проспект Шевченка, 7а (0 поверх)
+                Вул.Симоненка, 4в (внутрішній двір)
               </span>
             </label>
           </li>
@@ -102,7 +100,7 @@ export default function Contacts() {
               <input type='radio' id='sixth_location' name='drone' value='sixth_location' />
               <span className='radio'></span>
               <span className='text-[1rem] xs:text-xl font-bold'>
-                Репетитор для учнів 1-4 класів
+                Репетиторський центр для учнів 1-4 класів
               </span>
               <span className='flex gap-1 text-xs md:text-[1rem] text-[#646464]'>
                 <Image src={pin} alt='Точка геолокації' />
@@ -115,7 +113,7 @@ export default function Contacts() {
               <input type='radio' id='seventh_location' name='drone' value='seventh_location' />
               <span className='radio'></span>
               <span className='text-[1rem] xs:text-xl font-bold'>
-                Приватна середня школа, Репетиторський центр для 5-11 класів
+                Ліцей "Пізнайки-Розвивайки", Репетиторський центр для 5-11 класів
               </span>
               <span className='flex gap-1 text-xs md:text-[1rem] text-[#646464]'>
                 <Image src={pin} alt='Точка геолокації' />

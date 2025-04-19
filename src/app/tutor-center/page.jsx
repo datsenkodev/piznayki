@@ -150,59 +150,6 @@ export default function TutorCenter() {
               <li>Заняття 2 рази на тиждень. Графік по домовленності.</li>
             </ul>
           </div>
-          <div className='advice-item bg-[#727EFC]'>
-            <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>
-              Англійська мова
-            </h4>
-            <ul className='tutor-cards-list'>
-              <li>Поліпшить успішність в школі</li>
-              <li>Допоможе підготуватися до іспитів і олімпіад</li>
-              <li>Розвине здатність вільно говорити, читати і писати англійською мовою</li>
-            </ul>
-          </div>
-          <div className='advice-item bg-[#FFB400]'>
-            <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>
-              Українська мова
-            </h4>
-            <ul className='tutor-cards-list'>
-              <li>Поліпшить успішність в школі</li>
-              <li>Допоможе підготуватися до іспитів і олімпіад</li>
-              <li>Розвине здатність вільно говорити, читати і писати українською мовою</li>
-            </ul>
-          </div>
-          <div className='advice-item bg-[#EF6936]'>
-            <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>Математика</h4>
-            <ul className='tutor-cards-list'>
-              <li>Поліпшить успішність в школі</li>
-              <li>Усуне прогалини в знаннях</li>
-              <li>Відродить інтерес до математики в цілому</li>
-              <li>Дозволить придбати глибокі знання, які не дають в школі</li>
-              <li>Допоможе швидко і без стресу підготуватися до іспитів і олімпіад</li>
-            </ul>
-          </div>
-          <div className='advice-item bg-[#3EA397]'>
-            <h4 className='relative font-bold text-white text-xl xs:text-[2rem]'>
-              Природничі дисципліни
-            </h4>
-            <ul className='tutor-cards-list'>
-              <li>Поліпшить успішність в школі</li>
-              <li>Усуне прогалини в знаннях</li>
-              <li>Відродить інтерес до дисципліни в цілому</li>
-              <li>Дозволить придбати глибокі знання, які не дають в школі</li>
-              <li>Допоможе швидко і без стресу підготуватися до іспитів і олімпіад</li>
-            </ul>
-          </div>
-          <div className='advice-item bg-[#1A1E4E]'>
-            <h4 className='relative text-white text-xl xs:text-[1.5rem]'>
-              Курс захоплюючої інформатики
-              <p className='font-bold block text-white'>"КіберХаб"</p>
-            </h4>
-            <ul className='tutor-cards-list'>
-              <li>З інформаційними навичками діти зануряться у кібер майбутнє</li>
-              <li>Ознайомляться з поняттями інформаційної безпеки</li>
-              <li>Заняття 2 рази на тиждень. Графік по домовленності.</li>
-            </ul>
-          </div>
         </Slider>
       </section>
       <Kids />
