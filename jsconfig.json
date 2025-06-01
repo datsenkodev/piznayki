@@ -1,21 +1,22 @@
 {
-  "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@/*": ["src/*"],
-      "@sass/*": ["src/sass/*"],
-      "@components/*": ["./src/components/*"],
-      "@pages/*": ["./src/pages/*"],
-      "@home/*": ["./src/pages/home/*"],
-      "@contacts/*": ["./src/pages/contacts/*"]
-    },
-    "target": "ES6",
-    "module": "commonjs",
-    "jsx": "react",
-    "strict": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+	"compilerOptions": {
+		"baseUrl": "./",
+		"paths": {
+			"@/*": ["src/*"],
+			"@sass/*": ["src/sass/*"],
+			"@components/*": ["./src/components/*"],
+			"@pages/*": ["./src/pages/*"],
+			"@home/*": ["./src/pages/home/*"],
+			"@contacts/*": ["./src/pages/contacts/*"],
+			"@json-ld/*": ["./src/json-ld/*"]
+		},
+		"target": "ES6",
+		"module": "commonjs",
+		"jsx": "react",
+		"strict": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "dist"]
 }

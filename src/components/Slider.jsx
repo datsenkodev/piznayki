@@ -132,7 +132,6 @@ export default function Slider({ children, darkerScrollbar }) {
       };
 
       window.addEventListener('resize', handleResize);
-      console.log(thumbRef);
 
       return () => {
         thumb.removeEventListener('mousedown', handleMouseDownThumb);

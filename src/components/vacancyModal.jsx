@@ -78,6 +78,7 @@ export default function Vacancy() {
           src={vacancy}
           alt='Викладач'
           style={{ height: '100%', objectFit: 'cover', objectPosition: 'center' }}
+          quality={100}
         />
       </div>
       <div className='max-w-full'>

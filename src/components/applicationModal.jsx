@@ -78,6 +78,7 @@ export default function Application() {
           src={application}
           alt='Щасливі діти на траві'
           style={{ height: '100%', objectFit: 'cover' }}
+          quality={100}
         />
       </div>
       <div className='max-w-full'>

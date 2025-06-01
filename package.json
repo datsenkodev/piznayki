@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "next": "15.2.4",
+    "next-intl": "^4.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "resend": "^4.2.0",
@@ -22,6 +23,7 @@
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
+    "fb-sdk": "^1.0.3",
     "motion": "^12.7.3",
     "sass": "^1.86.3",
     "tailwindcss": "^4.1.2"
